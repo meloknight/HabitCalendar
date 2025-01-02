@@ -1,3 +1,9 @@
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
   font-size: 14px;
 }
@@ -17,6 +23,61 @@ html {
   min-height: 100%;
 }
 
+
+
+
+
+
+
+
 body {
   margin-bottom: 60px;
 }
+
+nav{
+/*    border: 1px solid red;*/
+    display: flex;
+    justify-content: center;
+}
+
+.nav-internal-container {
+    width: 100vw;
+    max-width: 1000px;
+    display: flex;
+    height: 25px;
+    padding: 0 10px 0 10px;
+    border: 1px solid black;
+    justify-content:space-between;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-internal-container > li > a {
+    color: black;
+    text-decoration: none;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~ Calendar Section ~~~~~~~~~~~~~~~~~~~ */
+
+
+#calendar-container {
+    border: 1px solid red;
+}
+
+.day-container {
+    border: 1px solid black;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

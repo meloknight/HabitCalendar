@@ -13,6 +13,7 @@ namespace HabitCalendar.Controllers
             _logger = logger;
         }
 
+        //Action method
         public IActionResult Index()
         {
             return View();

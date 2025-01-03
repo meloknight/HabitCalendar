@@ -6,34 +6,89 @@
     <nav>
             <ul class="nav-internal-container">
                 <li><a href="#">Track Habit</a></li>
-                <li><a href="#">Stop Tracking a Habit</a></li>
+                <li><a href="#">Modify Habit</a></li>
+                <li><a href="#">Delete Habit</a></li>
+                <li><a href="#"></a></li>
+                <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                 <li><a href="#">Info</a></li>
                 <li><a href="#">Log In / Out</a></li>
             </ul>
     </nav>
 
-    <div id="calendar-container">
-        <div class="day-container">17</div>
-        <div class="day-container">16</div>
-        <div class="day-container">15</div>
-        <div class="day-container">14</div>
-        <div class="day-container">13</div>
-        <div class="day-container">12</div>
-        <div class="day-container">11</div>
-        <div class="day-container">10</div>
-        <div class="day-container">9</div>
-        <div class="day-container">8</div>
-        <div class="day-container">7</div>
-        <div class="day-container">6</div>
-        <div class="day-container">5</div>
-        <div class="day-container">4</div>
-    </div>
+    <section id="calendar-section">
 
+        <div id="days-of-week-container">
+            <div class="day-of-week">Sunday</div>
+            <div class="day-of-week">Monday</div>
+            <div class="day-of-week">Tuesday</div>
+            <div class="day-of-week">Wednesday</div>
+            <div class="day-of-week">Thursday</div>
+            <div class="day-of-week">Friday</div>
+            <div class="day-of-week">Saturday</div>
+        </div>
 
+        <div id="greater-calendar-container">
+            <div id="side-calendar-area">
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container">^ Feb 2025 ^</div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container">^ Jan 2025 ^</div>
+            </div>
+            <div id="calendar-container">
+                @{
+                    for(int i = 30; i > 1; i--)
+                    {
+                        <div class="day-container">@i</div>
+                    }
+                }
+                <div class="day-container current-day">1</div>
+                <div class="day-container">16</div>
+                <div class="day-container">15</div>
+                <div class="day-container">14</div>
+                <div class="day-container">13</div>
+                <div class="day-container">12</div>
+                <div class="day-container">11</div>
+                <div class="day-container">10</div>
+                <div class="day-container day-not-visible">9</div>
+                <div class="day-container">8</div>
+                <div class="day-container">7</div>
+                <div class="day-container day-not-visible">6</div>
+                <div class="day-container">5</div>
+                <div class="day-container">4</div>
+                <div class="day-container">4</div>
+                <div class="day-container">4</div>
+                <div class="day-container">4</div>
+                <div class="day-container">4</div>
+                <div class="day-container">4</div>
+                <div class="day-container day-not-visible">4</div>
+                <div class="day-container non-current-month">4</div>
+                <div class="day-container non-current-month">4</div>
+                <div class="day-container non-current-month">4</div>
+                <div class="day-container non-current-month">4</div>
+                <div class="day-container non-current-month">4</div>
+                <div class="day-container non-current-month">4</div>
+                <div class="day-container non-current-month">4</div>
+                <div class="day-container non-current-month">1</div>
+            </div>
 
-    <div class="">
-        <h1 class="">Welcome</h1>
-    </div>
+            <div id="side-calendar-area">
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+                <div class="side-container"></div>
+            </div>
+        </div>
+    </section>
 
 
 

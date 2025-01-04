@@ -1,0 +1,39 @@
+﻿@model List<Habit>
+
+<a asp-controller="Home" asp-action="Index">Home</a>
+
+
+
+
+<section id="habit-list-section">
+    <div id="habit-list-header">
+        <h3>Habit List</h3>
+        <a asp-controller="" asp-action="">Create New Habit</a>
+    </div>
+    <table id="habit-list-table">
+        <thead>
+            <tr>
+                <th>
+                    Habit Name
+                </th>
+                <th>
+                    Habit Description
+                </th>
+                <th>
+                    Habit Display
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var obj in Model)
+            {
+                <tr>
+                    <td>@obj.HabitName</td>
+                    <td>@obj.HabitDescription</td>
+                    <td>@obj.HabitDisplayMethod</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+

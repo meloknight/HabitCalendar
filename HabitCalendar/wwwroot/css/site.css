@@ -132,6 +132,60 @@ nav{
 
 
 
+
+
+
+
+
+/* ~~~~~~~~~~~~~~~~~~~ HABIT LIST PAGE ~~~~~~~~~~~~~~~~~~~ */
+#habit-list-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+/*    border: 1px solid purple;*/
+}
+
+#habit-list-header {
+    width: 100vw;
+    max-width: 1000px;
+/*    border: 1px dashed black;*/
+    display: flex;
+    justify-content: space-between;
+}
+
+#habit-list-table {
+    width: 100vw;
+    max-width: 1000px;
+    margin-top: 10px;
+}
+
+#habit-list-table > thead > tr,
+#habit-list-table > tbody > tr {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#habit-list-table th, 
+#habit-list-table td {
+    border: 1px solid red;
+    
+
+} 
+
+
+
+
+
+
+
+
+
+
+
+
 /* ~~~~~~~~~~~~~~~~~~~ Unused Section ~~~~~~~~~~~~~~~~~~~ */
 
 /*

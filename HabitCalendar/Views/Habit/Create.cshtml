@@ -1,0 +1,42 @@
+﻿
+@model Habit;
+
+
+
+<form method="post">
+    <div>
+        <div>
+            <h2>Create Habit</h2>
+            <hr/>
+
+        </div>
+        <div>
+            <label asp-for="HabitName"></label>
+            <input asp-for="HabitName"/>
+
+        </div>
+        <div>
+            <label asp-for="HabitDescription"></label>
+            <input asp-for="HabitDescription"/>
+        </div>
+        <div>
+            <label asp-for="HabitDisplayMethod"></label>
+            <input asp-for="HabitDisplayMethod"/>
+        </div>
+        <button type="submit">Create</button>
+        <a asp-controller="Habit" asp-action="Index">Back to Habit List</a>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+

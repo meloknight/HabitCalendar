@@ -20,7 +20,11 @@
             </div>
             <div>
                 <label asp-for="HabitDisplayMethod"></label>
-                <input asp-for="HabitDisplayMethod" />
+                <select asp-for="HabitDisplayMethod">
+                    <option value="star">Star</option>
+                    <option value="circle">Circle</option>
+                    <option value="number">Number</option>
+                </select>
                 <span asp-validation-for="HabitDisplayMethod"></span>
             </div>
             <button type="submit">Update</button>

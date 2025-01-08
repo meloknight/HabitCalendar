@@ -19,8 +19,12 @@
             </div>
             <div>
                 <label asp-for="HabitDisplayMethod"></label>
-                <input asp-for="HabitDisplayMethod"/>
-                <span asp-validation-for="HabitDisplayMethod"></span>
+                <select asp-for="HabitDisplayMethod">
+                    <option value="star">Star</option>
+                    <option value="circle">Circle</option>
+                    <option value="number">Number</option>
+                </select>
+                 @* <span asp-validation-for="HabitDisplayMethod"></span> *@
             </div>
             <button type="submit">Create</button>
             <a asp-controller="Habit" asp-action="Index">Back to Habit List</a>

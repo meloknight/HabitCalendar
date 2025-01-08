@@ -193,13 +193,13 @@ nav{
     font-weight: inherit;
 } 
 #habit-list-table td {
-/*    display: flex;*/
-/*    align-items: center;*/
+    display: flex;
+    align-items: center;
     border: 1px solid var(--color-dark);
 /*    text-align: left;*/
     margin-bottom: 10px;
     padding:8px;
-    min-height: 60px;
+    min-height: 50px;
 }
 
 .habit-list-action a, .habit-list-action a:active {

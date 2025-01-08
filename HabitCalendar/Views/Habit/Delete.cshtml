@@ -18,7 +18,11 @@
             </div>
             <div>
                 <label asp-for="HabitDisplayMethod"></label>
-                <input asp-for="HabitDisplayMethod" disabled />
+                <select asp-for="HabitDisplayMethod" disabled>
+                    <option value="star">Star</option>
+                    <option value="circle">Circle</option>
+                    <option value="number">Number</option>
+                </select>
             </div>
             <button type="submit">Delete</button>
             <a asp-controller="Habit" asp-action="Index">Back to Habit List</a>

@@ -11,15 +11,14 @@ namespace HabitCalendar.Models
         [DisplayName( "Habit Name" )]
         [MaxLength( 30, ErrorMessage = "Max length is 30 characters" )]
         [RegularExpression( @"^[^.\[\]\(\)\{\}]+$", ErrorMessage = "Special characters like brackets and periods are not allowed." )]
-        public string HabitName { get; set; }
+        public string? HabitName { get; set; }
 
         [DisplayName( "Habit Description" )]
         [MaxLength( 120, ErrorMessage = "Max length is 120 characters" )]
-        [RegularExpression( @"^[^.\[\]\(\)\{\}]+$", ErrorMessage = "Special characters like brackets and periods are not allowed." )]
+        [RegularExpression( @"^[^.\[\]\(\)\{\}\<\>]+$", ErrorMessage = "Special characters like brackets and periods are not allowed." )]
         public string? HabitDescription { get; set; }
         [Required]
         [DisplayName( "Habit Display Method" )]
-        public string HabitDisplayMethod { get; set; }
-
+        public string? HabitDisplayMethod { get; set; }
     }
 }

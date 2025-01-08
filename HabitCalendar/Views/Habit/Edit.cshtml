@@ -1,36 +1,37 @@
-﻿
-@model Habit;
+﻿@model Habit;
 <div class="form-container">
     <form method="post">
+        <input asp-for="HabitId" hidden />
         <div>
             <div>
-                <div>Create Habit</div>
+                <h2>Edit Habit</h2>
+                <hr />
             </div>
-             @* <div asp-validation-summary="ModelOnly"></div> *@
+            @* <div asp-validation-summary="ModelOnly"></div> *@
             <div>
                 <label asp-for="HabitName"></label>
-                <input asp-for="HabitName"/>
+                <input asp-for="HabitName" />
                 <span asp-validation-for="HabitName"></span>
             </div>
             <div>
                 <label asp-for="HabitDescription"></label>
-                <input asp-for="HabitDescription"/>
+                <input asp-for="HabitDescription" />
                 <span asp-validation-for="HabitDescription"></span>
             </div>
             <div>
                 <label asp-for="HabitDisplayMethod"></label>
-                <input asp-for="HabitDisplayMethod"/>
+                <input asp-for="HabitDisplayMethod" />
                 <span asp-validation-for="HabitDisplayMethod"></span>
             </div>
-            <button type="submit">Create</button>
+            <button type="submit">Update</button>
             <a asp-controller="Habit" asp-action="Index">Back to Habit List</a>
         </div>
     </form>
 </div>
 
-@section Scripts{
+@section Scripts {
     @{
-        <partial name="_ValidationScriptsPartial"/>
+        <partial name="_ValidationScriptsPartial" />
     }
 }
 

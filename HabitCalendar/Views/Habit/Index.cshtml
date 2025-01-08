@@ -1,13 +1,12 @@
 ﻿@model List<Habit>
 
-<a asp-controller="Home" asp-action="Index">Home</a>
-
-
-
-
 <section id="habit-list-section">
     <div id="habit-list-header">
-        <h3>Habit List</h3>
+        <div class="habit-list-title">Habit List</div>
+        @if ( TempData["success"] != null )
+        {
+            <div class="temp-data-success">@TempData["success"]</div>
+        }
         <a asp-controller="Habit" asp-action="Create"><i class="fa-solid fa-plus"></i> Create New Habit</a>
     </div>
     <table id="habit-list-table">
@@ -22,6 +21,8 @@
                 <th>
                     Habit Display
                 </th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,16 @@
                     <td>@obj.HabitName</td>
                     <td>@obj.HabitDescription</td>
                     <td>@obj.HabitDisplayMethod</td>
+                    <td>
+                        <div role="group" class="habit-list-edit habit-list-action">
+                            <a asp-controller="Habit" asp-action="Edit" asp-route-habitId="@obj.HabitId"><i class="fa-solid fa-pencil"></i> Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div role="group" class="habit-list-delete habit-list-action">
+                                <a asp-controller="Habit" asp-action="Delete" asp-route-habitId="@obj.HabitId"><i class="fa-solid fa-trash"></i> Delete</a>
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>

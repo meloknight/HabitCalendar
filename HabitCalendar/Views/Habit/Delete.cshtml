@@ -1,0 +1,43 @@
+﻿@model Habit;
+<div class="form-container">
+    <form method="post">
+        <input asp-for="HabitId" hidden />
+        <div>
+            <div>
+                <h2>Delete Habit</h2>
+                <hr />
+            </div>
+            @* <div asp-validation-summary="ModelOnly"></div> *@
+            <div>
+                <label asp-for="HabitName"></label>
+                <input asp-for="HabitName" disabled/>
+            </div>
+            <div>
+                <label asp-for="HabitDescription"></label>
+                <input asp-for="HabitDescription" disabled />
+            </div>
+            <div>
+                <label asp-for="HabitDisplayMethod"></label>
+                <input asp-for="HabitDisplayMethod" disabled />
+            </div>
+            <button type="submit">Delete</button>
+            <a asp-controller="Habit" asp-action="Index">Back to Habit List</a>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

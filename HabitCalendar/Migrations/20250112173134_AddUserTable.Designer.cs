@@ -4,6 +4,7 @@ using HabitCalendar.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HabitCalendar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250112173134_AddUserTable")]
+    partial class AddUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,14 +46,32 @@ namespace HabitCalendar.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("HabitId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Habits");
+
+                    b.HasData(
+                        new
+                        {
+                            HabitId = 1,
+                            HabitDescription = "Brush my teeth for 2 minutes",
+                            HabitDisplayMethod = "icon",
+                            HabitName = "Brush Teeth"
+                        },
+                        new
+                        {
+                            HabitId = 2,
+                            HabitDescription = "Workout for at least half an hour",
+                            HabitDisplayMethod = "string",
+                            HabitName = "Workout"
+                        },
+                        new
+                        {
+                            HabitId = 3,
+                            HabitDescription = "Take the dog out for a half hour walk",
+                            HabitDisplayMethod = "icon",
+                            HabitName = "Walk the dog"
+                        });
                 });
 
             modelBuilder.Entity("HabitCalendar.Models.User", b =>
@@ -81,32 +102,16 @@ namespace HabitCalendar.Migrations
                         {
                             UserId = 1,
                             Password = "1111",
-                            StartDate = new DateOnly(2025, 1, 13),
+                            StartDate = new DateOnly(2025, 1, 12),
                             UserName = "Billy123"
                         },
                         new
                         {
                             UserId = 2,
                             Password = "2222",
-                            StartDate = new DateOnly(2025, 1, 13),
+                            StartDate = new DateOnly(2025, 1, 12),
                             UserName = "Tommers5555"
                         });
-                });
-
-            modelBuilder.Entity("HabitCalendar.Models.Habit", b =>
-                {
-                    b.HasOne("HabitCalendar.Models.User", "User")
-                        .WithMany("Habit")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HabitCalendar.Models.User", b =>
-                {
-                    b.Navigation("Habit");
                 });
 #pragma warning restore 612, 618
         }

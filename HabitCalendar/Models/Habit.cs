@@ -22,7 +22,7 @@ namespace HabitCalendar.Models
         [Required]
         [DisplayName( "Habit Display Method" )]
         public string HabitDisplayMethod { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; } = null!;
+        //public int UserId { get; set; }
+        //public User User { get; set; } = null!;
     }
 }

@@ -1,11 +1,12 @@
 ﻿/* This section is about configuration and is required to get the database connected and working */
 
 using HabitCalendar.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HabitCalendar.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext
     {
         public ApplicationDbContext( DbContextOptions<ApplicationDbContext> options ) : base( options )
         {
@@ -17,6 +18,7 @@ namespace HabitCalendar.Data
 
         protected override void OnModelCreating( ModelBuilder modelBuilder )
         {
+            base.OnModelCreating( modelBuilder );
 
             modelBuilder.Entity<Habit>().HasData(
                 new Habit { HabitId = 1, HabitName = "Brush Teeth", HabitDescription = "Brush my teeth for 2 minutes", HabitDisplayMethod = "icon" },

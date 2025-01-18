@@ -13,8 +13,8 @@ namespace HabitCalendar.Data
 
         }
 
-        //public DbSet<User> Users { get; set; } = null!;
         public DbSet<Habit> Habits { get; set; } = null!;
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
 
         protected override void OnModelCreating( ModelBuilder modelBuilder )
         {

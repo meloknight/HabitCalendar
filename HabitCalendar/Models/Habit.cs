@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HabitCalendar.Models
 {
@@ -22,7 +23,11 @@ namespace HabitCalendar.Models
         [Required]
         [DisplayName( "Habit Display Method" )]
         public string HabitDisplayMethod { get; set; } = null!;
-        //public int UserId { get; set; }
-        //public User User { get; set; } = null!;
+
+        public DateOnly CreatedDate = DateOnly.FromDateTime( DateTime.UtcNow );
+
+        [ForeignKey( "ApplicationUser" )]
+        public string? ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; } = null!;
     }
 }

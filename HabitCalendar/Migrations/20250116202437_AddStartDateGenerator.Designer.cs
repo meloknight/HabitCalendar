@@ -4,6 +4,7 @@ using HabitCalendar.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HabitCalendar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250116202437_AddStartDateGenerator")]
+    partial class AddStartDateGenerator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,6 @@ namespace HabitCalendar.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HabitId"));
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("HabitDescription")
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
@@ -47,8 +47,6 @@ namespace HabitCalendar.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("HabitId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Habits");
 
@@ -297,15 +295,6 @@ namespace HabitCalendar.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("HabitCalendar.Models.Habit", b =>
-                {
-                    b.HasOne("HabitCalendar.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Habits")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.Navigation("ApplicationUser");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -355,11 +344,6 @@ namespace HabitCalendar.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HabitCalendar.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Habits");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,7 +5,6 @@
     
 }
 
-
 :root {
     --large-screen-day-width: 100px;
     --color-dark: black;
@@ -35,7 +34,6 @@ nav{
     justify-content: center;
     margin-bottom: 60px;
     margin-top: 10px;
-
 }
 
 .nav-internal-container {
@@ -65,8 +63,13 @@ nav{
     color: var(--color-nice);
 }
 
-/* ~~~~~~~~~~~~~~~~~~~ Calendar Section ~~~~~~~~~~~~~~~~~~~ */
+.nav-identity-section {
+     
+}
 
+
+
+/* ~~~~~~~~~~~~~~~~~~~ Calendar Section ~~~~~~~~~~~~~~~~~~~ */
 #calendar-section {
     display: flex;
     flex-direction: column;
@@ -138,7 +141,6 @@ nav{
     border: 1px solid var(--color-light);
     color: var(--color-light)
 }
-
 
 /* ~~~~~~~~~~~~~~~~~~~ HABIT LIST PAGE ~~~~~~~~~~~~~~~~~~~ */
 #habit-list-section {

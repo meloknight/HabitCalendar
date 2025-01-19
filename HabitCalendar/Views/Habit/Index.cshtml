@@ -1,45 +1,46 @@
 ﻿@model List<Habit>
 
 <section id="habit-list-section">
-    <div id="habit-list-header">
-        <div class="habit-list-title">Habit List</div>
+    <div id="habit-list-header" class="table-header table-header--habit-list">
+        <div>Habit List</div>
         @if ( TempData["success"] != null )
         {
-            <div class="temp-data-success">@TempData["success"]</div>
+            <div class="temp-data-success table-header__temp-data-success">@TempData["success"]</div>
         }
-        <a asp-controller="Habit" asp-action="Create"><i class="fa-solid fa-plus"></i> Create New Habit</a>
+        <a class="table-header__anchor" asp-controller="Habit" asp-action="Create"><i class="fa-solid fa-plus"></i> Create New Habit</a>
     </div>
-    <table id="habit-list-table">
+
+    <table id="habit-list-table" class="table table--habit-list">
         <thead>
-            <tr>
-                <th>
+            <tr class="table__row">
+                <th class="table__header-cell">
                     Habit Name
                 </th>
-                <th>
+                <th class="table__header-cell">
                     Habit Description
                 </th>
-                <th>
+                <th class="table__header-cell">
                     Habit Display
                 </th>
-                <th></th>
-                <th></th>
+                <th class="table__header-cell"></th>
+                <th class="table__header-cell"></th>
             </tr>
         </thead>
         <tbody>
             @foreach(var obj in Model)
             {
-                <tr>
-                    <td>@obj.HabitName</td>
-                    <td>@obj.HabitDescription</td>
-                    <td>@obj.HabitDisplayMethod</td>
-                    <td>
-                        <div role="group" class="habit-list-edit habit-list-action">
-                            <a asp-controller="Habit" asp-action="Edit" asp-route-habitId="@obj.HabitId"><i class="fa-solid fa-pencil"></i> Edit</a>
+                <tr class="table__row">
+                    <td class="table__data-cell">@obj.HabitName</td>
+                    <td class="table__data-cell">@obj.HabitDescription</td>
+                    <td class="table__data-cell">@obj.HabitDisplayMethod</td>
+                    <td class="table__data-cell">
+                        <div role="group" class="table__list-edit">
+                            <a class="table__anchor" asp-controller="Habit" asp-action="Edit" asp-route-habitId="@obj.HabitId"><i class="fa-solid fa-pencil"></i> Edit</a>
                         </div>
                     </td>
-                    <td>
-                        <div role="group" class="habit-list-delete habit-list-action">
-                                <a asp-controller="Habit" asp-action="Delete" asp-route-habitId="@obj.HabitId"><i class="fa-solid fa-trash"></i> Delete</a>
+                    <td class="table__data-cell">
+                        <div role="group" class="table__list-delete">
+                            <a class="table__anchor" asp-controller="Habit" asp-action="Delete" asp-route-habitId="@obj.HabitId"><i class="fa-solid fa-trash"></i> Delete</a>
                         </div>
                     </td>
                 </tr>

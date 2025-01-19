@@ -1,34 +1,34 @@
 ﻿@model Habit;
 <div class="form-container">
-    <form method="post">
+    <form method="post" class="crud-form">
         <input asp-for="HabitId" hidden />
         <div>
             <div>
-                <h2>Edit Habit</h2>
-                <hr />
+                <h2 class="crud-form__title">Edit Habit</h2>
+                @* <hr /> *@
             </div>
             @* <div asp-validation-summary="ModelOnly"></div> *@
-            <div>
-                <label asp-for="HabitName"></label>
-                <input asp-for="HabitName" />
+            <div class="crud-form__field">
+                <label class="crud-form__label" asp-for="HabitName"></label>
+                <input class="crud-form__input" asp-for="HabitName" />
                 <span asp-validation-for="HabitName"></span>
             </div>
-            <div>
-                <label asp-for="HabitDescription"></label>
-                <input asp-for="HabitDescription" />
-                <span asp-validation-for="HabitDescription"></span>
-            </div>
-            <div>
-                <label asp-for="HabitDisplayMethod"></label>
-                <select asp-for="HabitDisplayMethod">
+            <div class="crud-form__field">
+                <label class="crud-form__label" asp-for="HabitDisplayMethod"></label>
+                <select class="crud-form__select" asp-for="HabitDisplayMethod">
                     <option value="star">Star</option>
                     <option value="circle">Circle</option>
                     <option value="number">Number</option>
                 </select>
                 <span asp-validation-for="HabitDisplayMethod"></span>
             </div>
-            <button type="submit">Update</button>
-            <a asp-controller="Habit" asp-action="Index">Back to Habit List</a>
+            <div class="crud-form__field">
+                <label class="crud-form__label" asp-for="HabitDescription"></label>
+                <textarea class="crud-form__text-area" asp-for="HabitDescription" />
+                <span asp-validation-for="HabitDescription"></span>
+            </div>
+            <button class="crud-form__submit-button" type="submit">Update</button>
+            <a class="crud-form__back-button" asp-controller="Habit" asp-action="Index">Back to Habit List</a>
         </div>
     </form>
 </div>

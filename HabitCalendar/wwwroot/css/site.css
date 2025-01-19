@@ -166,69 +166,59 @@
     flex-direction: column;
     align-items: center;
     height: 80vh;
-/*    border: 1px solid purple;*/
-}
-.habit-list-title {
-    
 }
 
-#habit-list-header {
+.table-header--habit-list {
     width: 100vw;
     max-width: calc(var(--large-screen-day-width)*7 + (10px * 6));
-/*        border: 1px dashed black;*/
     display: flex;
     justify-content: space-between;
 }
-.temp-data-success {
+.table-header__temp-data-success {
     color: #72c762
 }
-#habit-list-header a, #habit-list-header a:active {
+.table-header__anchor, .table-header__anchor:active {
     text-decoration: none;
     color: inherit;
 }
-#habit-list-header i, #habit-list-header a:hover {
+.table-header__anchor i, table-header__anchor:hover {
     color: var(--color-nice);
 }
 
-#habit-list-table {
+/* habit list table block */
+.table--habit-list {
     width: 100vw;
     max-width: calc(var(--large-screen-day-width)*7 + (10px * 6));
     margin-top: 30px;
     border: none;
 }
-
-#habit-list-table > thead > tr,
-#habit-list-table > tbody > tr {
-/*    text-align: center;*/
+.table__row {
     display: grid;
     gap: 10px;
-    grid-template-columns: 100px calc(100px * 3 + 10px * 2) 100px 100px 100px;
-    
+    grid-template-columns: 100px calc(100px * 3 + 10px * 2) 100px 100px 100px; 
 }
-
-#habit-list-table th {
+.table__header-cell {
     text-align: left;
     margin-bottom: 10px;
     font-weight: inherit;
-} 
-#habit-list-table td {
+}
+.table__data-cell {
     display: flex;
     align-items: center;
     border: 1px solid var(--color-dark);
-/*    text-align: left;*/
+    /*    text-align: left;*/
     margin-bottom: 10px;
-    padding:8px;
+    padding: 8px;
     min-height: 50px;
 }
-
-.habit-list-action a, .habit-list-action a:active {
+.table__anchor, .table__anchor:active {
     text-decoration: none;
     color: inherit;
 }
-.habit-list-edit i, .habit-list-edit:hover {
+.table__list-edit i, .table__list-edit:hover {
     color: #0094ff;
 }
-.habit-list-delete i, .habit-list-delete:hover {
+.table__list-delete i, .table__list-delete:hover {
     color: #ff9595;
 }
 
@@ -239,16 +229,22 @@
     display: grid;
     justify-content: center;
 }
-.form--habit {
-    border: 1px solid orange;
+.crud-form {
+/*    border: 1px solid orange;*/
     height: 200px;
-    width: calc(var(--large-screen-day-width)*7 + (10px * 6));
-    
+/*    width: calc(var(--large-screen-day-width)*7 + (10px * 6));*/
+    width: 400px;
 }
-
-
-
-
+.crud-form__field {
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+/*    border: 1px solid black;*/
+}
+.crud-form__input, .crud-form__select {
+    height: 30px;
+    padding-left: 2px;
+}
 
 
 

@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,20 +17,41 @@
 
 </head>
 <body>
-    <div class="random-object"></div>
+    @* <div class="random-object"></div> *@
     <header>
-        <nav>
-            <ul class="nav-internal-container">
-                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-controller="Habit" asp-action="Index">Habits</a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                @* <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li> *@
+        @* <p> hello gamer@gmail.com</p> *@
+        <nav class="nav nav--main">
+            <ul class="nav__internal-container">
+                <li class="nav__list-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="nav__list-item"><a asp-controller="Habit" asp-action="Index">Habits</a></li>
+                <li class="nav__list-item"><a href="#"></a></li>
+                <li class="nav__list-item"><a href="#"></a></li>
+                <li class="nav__list-item"><a href="#"></a></li>
+                @* The two nav Identity links *@
+                @if (SignInManager.IsSignedIn(User)){
+                    <li class="nav-identity-item nav__list-item">
+                        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                    </li>
+                    <li class="nav-identity-item nav__list-item">
+                        <form id="logoutForm" class="identity-form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-identity-item nav__list-item">
+                        <a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    </li>
+                    <li class="nav-identity-item nav__list-item">
+                        <a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                }
                 @* <li><a href="#">Info</a></li> *@
                 @* <li><a href="#"></a></li> *@
                 @* <li><a href="#"></a></li> *@
                 @* <li><a href="#"></a></li> *@
-        <partial name="_LoginPartial"/>
+                @* <partial name="_LoginPartial"/> *@
             </ul>
         </nav>
 

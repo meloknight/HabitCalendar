@@ -10,6 +10,7 @@
     --color-dark: black;
     --color-medium: grey;
     --color-light: #888888;
+    --color-white: white;
     --color-nice: #F0CB53;
 }
 
@@ -28,15 +29,21 @@
     background-color: red;
 }*/
 
+/* ~~~~~~~~~~~~~~~~~~~ Standard Blocks Section ~~~~~~~~~~~~~~~~~~~ */
+.button{
 
-nav{
+}
+
+
+
+.nav{
     display: flex;
     justify-content: center;
     margin-bottom: 60px;
     margin-top: 10px;
 }
 
-.nav-internal-container {
+.nav__internal-container {
     width: 100vw;
     max-width: calc(var(--large-screen-day-width)*7 + (10px * 6));
     display: grid;
@@ -51,7 +58,7 @@ nav{
     z-index: 40;
 }
 
-.nav-internal-container > li > a {
+.nav__internal-container > li > a {
     color: black;
     text-decoration: none;
     /*    border: 1px solid black;*/
@@ -59,15 +66,26 @@ nav{
     content: "";
     transition: all 0.15s ease-in-out;
 }
-.nav-internal-container > li > a:hover {
+.nav__internal-container > li > a:hover {
     color: var(--color-nice);
 }
 
-.nav-identity-section {
-     
+/* NAV IDENTITY SECTION */
+.identity-form-inline {
+    width: 100px;
+    height: 20px;
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid var(--color-white);
 }
-
-
+.identity-form-inline button {
+    border: none;
+    background-color: var(--color-white);
+    transition: all 0.15s ease-in-out;
+}
+.identity-form-inline button:hover {
+    color: var(--color-nice);
+}
 
 /* ~~~~~~~~~~~~~~~~~~~ Calendar Section ~~~~~~~~~~~~~~~~~~~ */
 #calendar-section {
@@ -97,7 +115,6 @@ nav{
     gap: 10px;
 }
 
-
 #calendar-container {
     display: grid;
     width: 100vw;
@@ -110,7 +127,7 @@ nav{
     border: 1px solid black;
     width: var(--large-screen-day-width);
     height: var(--large-screen-day-width);
-    transition: all 0.1s ease;
+    transition: all 0.5s ease;
     padding: 4px;
 }
 .day-container:hover {
@@ -222,11 +239,11 @@ nav{
     display: grid;
     justify-content: center;
 }
-form {
+.form--habit {
     border: 1px solid orange;
     height: 200px;
     width: calc(var(--large-screen-day-width)*7 + (10px * 6));
-    padding: 10px;
+    
 }
 
 

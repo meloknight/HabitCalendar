@@ -1,5 +1,6 @@
 ﻿using HabitCalendar.Data;
 using HabitCalendar.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HabitCalendar.Controllers
@@ -7,12 +8,14 @@ namespace HabitCalendar.Controllers
     public class HabitController:Controller
     {
         private readonly ApplicationDbContext _db;
-        public HabitController( ApplicationDbContext db )
+
+        public HabitController( ApplicationDbContext db, UserManager<ApplicationUser> userManager )
         {
             _db = db;
         }
         public IActionResult Index()
         {
+
             List<Habit> objHabitList = _db.Habits.ToList();
             return View( objHabitList );
         }

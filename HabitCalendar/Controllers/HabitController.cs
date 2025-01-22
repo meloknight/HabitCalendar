@@ -1,6 +1,5 @@
 ﻿using HabitCalendar.Data;
 using HabitCalendar.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HabitCalendar.Controllers
@@ -9,7 +8,7 @@ namespace HabitCalendar.Controllers
     {
         private readonly ApplicationDbContext _db;
 
-        public HabitController( ApplicationDbContext db, UserManager<ApplicationUser> userManager )
+        public HabitController( ApplicationDbContext db )
         {
             _db = db;
         }
@@ -22,6 +21,7 @@ namespace HabitCalendar.Controllers
 
         public IActionResult Create()
         {
+            //var users = _userManager.Users.ToList();
             return View();
         }
         [HttpPost]

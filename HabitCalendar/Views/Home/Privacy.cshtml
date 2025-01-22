@@ -1,20 +1,20 @@
-﻿@{
+﻿@model List<Habit>
+
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 <p>Use this page to detail your site's privacy policy. NOT!</p>
 @{
-    string stringu = "friend!!!";
-    if ( true )
-    {
-        <h1>@stringu</h1>
+    foreach(var habit in Model) {
+        <br />
+        <p>@habit.HabitName</p>
+        <p>@habit.HabitDescription</p>
+        <p>@habit.HabitDisplayMethod</p>
+        <p>@habit.HabitId</p>
+        
     }
-}
-
-@for( int i = 0; i < 5; i++)
-{
-    <p>Item @i</p>
 }
 
 

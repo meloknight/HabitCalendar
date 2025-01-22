@@ -25,6 +25,7 @@ namespace HabitCalendar.Data
                 new Habit { HabitId = 2, HabitName = "Workout", HabitDescription = "Workout for at least half an hour", HabitDisplayMethod = "string" },
                 new Habit { HabitId = 3, HabitName = "Walk the dog", HabitDescription = "Take the dog out for a half hour walk", HabitDisplayMethod = "icon" }
                 );
+
         }
     }
 }

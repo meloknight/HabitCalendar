@@ -4,6 +4,7 @@ using HabitCalendar.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HabitCalendar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250122202059_RemoveApplicationUserFromHabitModel")]
+    partial class RemoveApplicationUserFromHabitModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,31 +77,6 @@ namespace HabitCalendar.Migrations
                             HabitDisplayMethod = "icon",
                             HabitName = "Walk the dog"
                         });
-                });
-
-            modelBuilder.Entity("HabitCalendar.Models.HabitDaysCompleted", b =>
-                {
-                    b.Property<int>("HabitDaysCompletedId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HabitDaysCompletedId"));
-
-                    b.Property<DateOnly>("DateHabitCompleted")
-                        .HasColumnType("date");
-
-                    b.Property<int>("HabitId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Notes")
-                        .HasMaxLength(400)
-                        .HasColumnType("nvarchar(400)");
-
-                    b.HasKey("HabitDaysCompletedId");
-
-                    b.HasIndex("HabitId");
-
-                    b.ToTable("HabitDaysCompleted");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -329,15 +307,6 @@ namespace HabitCalendar.Migrations
                         .HasForeignKey("ApplicationUserId");
                 });
 
-            modelBuilder.Entity("HabitCalendar.Models.HabitDaysCompleted", b =>
-                {
-                    b.HasOne("HabitCalendar.Models.Habit", null)
-                        .WithMany("HabitsDaysCompleted")
-                        .HasForeignKey("HabitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -387,11 +356,6 @@ namespace HabitCalendar.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HabitCalendar.Models.Habit", b =>
-                {
-                    b.Navigation("HabitsDaysCompleted");
                 });
 
             modelBuilder.Entity("HabitCalendar.Models.ApplicationUser", b =>

@@ -28,6 +28,7 @@ namespace HabitCalendar.Models
 
         [ForeignKey( "ApplicationUser" )]
         public string? ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; } = null!;
+        //public ApplicationUser ApplicationUser { get; set; } = null!;
+        public ICollection<HabitDaysCompleted> HabitsDaysCompleted { get; set; } = null!;
     }
 }

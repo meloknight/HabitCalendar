@@ -23,6 +23,11 @@ namespace HabitCalendar.Controllers
         //Action method
         public IActionResult Index()
         {
+            var userId = _userManager.GetUserId( User );
+
+
+
+
             return View();
         }
 

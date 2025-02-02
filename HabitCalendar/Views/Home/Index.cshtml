@@ -1,10 +1,23 @@
-﻿@{
+﻿@using HabitCalendar.Models.ViewModels
+@model List<HabitCompletionViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
-    
-    
 
+@{
+    if (Model != null) {
+        foreach(var obj in Model) {
+            if(obj.DateHabitCompleted.Count() > 0) {
+                <h1>@obj.HabitName</h1>
+                for(int i = 0; i < obj.DateHabitCompleted.Count(); i++) {
+                    <h3>@obj.DateHabitCompleted[i]</h3>
+                }
+            }
+        }
 
+    }
+}
 
     <section id="calendar-section">
 
@@ -19,6 +32,8 @@
         </div>
 
         <div id="greater-calendar-container">
+
+            @* This section will need to be automated *@
             <div id="side-calendar-area">
                 <div class="side-container">- Feb 2025 -</div>
                 <div class="side-container"></div>
@@ -40,6 +55,8 @@
                 </div>
             </div>
             </div>
+
+            @* This section will need to be auto-generated *@
             <div id="calendar-container">
                 @{
                     for(int i = 30; i > 1; i--)

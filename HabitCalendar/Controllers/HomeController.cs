@@ -23,12 +23,23 @@ namespace HabitCalendar.Controllers
         //Action method
         public IActionResult Index()
         {
-            var userId = _userManager.GetUserId( User );
+            string? userId = _userManager.GetUserId( User );
 
-
-
-
+            //if ( userId != null )
+            //{
+            //    var userHabitsWithDatesCompleted = _db.Habits
+            //        .Where( h => h.ApplicationUserId == userId )
+            //        .Select( h => new HabitCompletionViewModel
+            //        {
+            //            HabitName = h.HabitName,
+            //            DateHabitCompleted = h.HabitsDaysCompleted.Select( c => c.DateHabitCompleted ).ToList()
+            //        } )
+            //        .ToList();
+            //    return View( userHabitsWithDatesCompleted );
+            //}
             return View();
+
+
         }
 
         public IActionResult Privacy()

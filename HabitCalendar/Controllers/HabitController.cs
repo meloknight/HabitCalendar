@@ -18,7 +18,11 @@ namespace HabitCalendar.Controllers
         public IActionResult Index()
         {
             var userId = _userManager.GetUserId( User );
-
+            //if ( userId == null )
+            //{
+            //    string? returnUrl = Url.Action( "Index", "Home" );
+            //    return RedirectToPage( "/Account/Login", new { area = "Identity", returnUrl } );
+            //}
             List<Habit> habitList = _db.Habits
                 .Where( h => h.ApplicationUserId == userId )
                 .ToList();
@@ -75,6 +79,8 @@ namespace HabitCalendar.Controllers
         {
             var userId = _userManager?.GetUserId( User );
             obj.ApplicationUserId = userId;
+
+
 
             if ( ModelState.IsValid )
             {

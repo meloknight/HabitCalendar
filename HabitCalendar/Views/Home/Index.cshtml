@@ -1,4 +1,4 @@
-﻿@using HabitCalendar.Models.ViewModels
+﻿@using HabitCalendar.Models
 @model List<HabitCompletionViewModel>
 
 @{
@@ -7,6 +7,7 @@
 
 @{
     if (Model != null) {
+        <h2>@Model[0].UserStartDate</h2>
         foreach(var obj in Model) {
             if(obj.DateHabitCompleted.Count() > 0) {
                 <h1>@obj.HabitName</h1>
@@ -19,80 +20,123 @@
     }
 }
 
-    <section id="calendar-section">
+<section id="calendar-section">
 
-        <div id="days-of-week-container">
-            <div class="day-of-week">Sunday</div>
-            <div class="day-of-week">Monday</div>
-            <div class="day-of-week">Tuesday</div>
-            <div class="day-of-week">Wednesday</div>
-            <div class="day-of-week">Thursday</div>
-            <div class="day-of-week">Friday</div>
-            <div class="day-of-week">Saturday</div>
-        </div>
+    <div id="days-of-week-container">
+        <div class="day-of-week">Sunday</div>
+        <div class="day-of-week">Monday</div>
+        <div class="day-of-week">Tuesday</div>
+        <div class="day-of-week">Wednesday</div>
+        <div class="day-of-week">Thursday</div>
+        <div class="day-of-week">Friday</div>
+        <div class="day-of-week">Saturday</div>
+    </div>
 
-        <div id="greater-calendar-container">
+    <div id="greater-calendar-container">
 
-            @* This section will need to be automated *@
-            <div id="side-calendar-area">
-                <div class="side-container">- Feb 2025 -</div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
+        @* This section will need to be automated *@
+        <div id="side-calendar-area">
+            <div class="side-container">- Feb 2025 -</div>
+            <div class="side-container"></div>
+            <div class="side-container"></div>
+            <div class="side-container"></div>
             <div class="side-container">
                 <i class="fa-solid fa-arrow-up"></i>
                 <div>
                     Feb 2025
                 </div>
-                </div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container">
+            </div>
+            <div class="side-container"></div>
+            <div class="side-container"></div>
+            <div class="side-container"></div>
+            <div class="side-container">
                 <i class="fa-solid fa-arrow-up"></i>
                 <div>
                     Jan 2025
                 </div>
             </div>
-            </div>
+        </div>
 
-            @* This section will need to be auto-generated *@
-            <div id="calendar-container">
-                @{
-                    for(int i = 30; i > 1; i--)
-                    {
-                        <div class="day-container">@i</div>
-                    }
+        @* This section will need to be auto-generated *@
+        <div id="calendar-container">
+            @{
+                DateOnly userStartDate = Model[0].UserStartDate;
+                int startDay = userStartDate.Day;
+                DateOnly todaysDate = DateOnly.FromDateTime(DateTime.UtcNow);
+                // int todaysDay = todaysDate.Day;
+
+                int userStartDateNumber = userStartDate.DayNumber;
+                int todaysDateNumber = todaysDate.DayNumber;
+                int daysElapsedSinceStartDate = todaysDateNumber - userStartDateNumber;
+
+                DateOnly incrementerDate = userStartDate;
+
+                // The starting 7 dates (determine whether visible or not)
+
+
+
+
+                <div class="day-container day-not-visible"></div>
+                <div class="day-container day-not-visible"></div>
+                <div class="day-container day-not-visible"></div>
+                <div class="day-container day-not-visible"></div>
+
+
+                <div class="day-container current-day">@todaysDate</div>
+
+                for (int i = daysElapsedSinceStartDate-1; i >= 0 ; i--)
+                {
+                    DateOnly incDate = incrementerDate.AddDays(i);
+                    <div class="day-container">@incDate</div>
                 }
-                <div class="day-container current-day">1</div>
-                <div class="day-container">16</div>
-                <div class="day-container">15</div>
-                <div class="day-container">14</div>
-                <div class="day-container">13</div>
-                <div class="day-container">12</div>
-                <div class="day-container">11</div>
-                <div class="day-container">10</div>
-                <div class="day-container day-not-visible">9</div>
-                <div class="day-container">8</div>
-                <div class="day-container">7</div>
-                <div class="day-container day-not-visible">6</div>
-                <div class="day-container">5</div>
-                <div class="day-container">4</div>
-                <div class="day-container">4</div>
-                <div class="day-container">4</div>
-                <div class="day-container">4</div>
-                <div class="day-container">4</div>
-            <div class="day-container"><i class="fa-solid fa-xmark"></i></div>
-                <div class="day-container day-not-visible">4</div>
-                <div class="day-container non-current-month">4</div>
-                <div class="day-container non-current-month">4</div>
-                <div class="day-container non-current-month">4</div>
-                <div class="day-container non-current-month">4</div>
-                <div class="day-container non-current-month">4</div>
-                <div class="day-container non-current-month">4</div>
-                <div class="day-container non-current-month">4</div>
-                <div class="day-container non-current-month">1</div>
-            </div>
+
+
+            }
+
+
+
+
+
+
+
+
+@*                 @{
+                     for(int i = 30; i > 1; i--) 
+                     { 
+                       <div class="day-container">@i</div> 
+                     } 
+                 } 
+                 <div class="day-container current-day">1</div> 
+                 <div class="day-container day-not-visible">16</div> 
+                 <div class="day-container">15</div> 
+                 <div class="day-container">14</div> 
+                 <div class="day-container">13</div> 
+                 <div class="day-container">12</div> 
+                 <div class="day-container">11</div> 
+                 <div class="day-container">10</div> 
+                 <div class="day-container day-not-visible">9</div> 
+                 <div class="day-container">8</div> 
+                 <div class="day-container">7</div> 
+                 <div class="day-container day-not-visible">6</div> 
+                 <div class="day-container">5</div> 
+                 <div class="day-container">4</div> 
+                 <div class="day-container">4</div> 
+                 <div class="day-container">4</div> 
+                <div class="day-container">4</div> 
+                <div class="day-container">4</div> 
+                <div class="day-container"><i class="fa-solid fa-xmark"></i></div> 
+                 <div class="day-container day-not-visible">4</div> 
+                 <div class="day-container non-current-month">4</div> 
+                 <div class="day-container non-current-month">4</div> 
+                 <div class="day-container non-current-month">4</div> 
+                 <div class="day-container non-current-month">4</div> 
+                 <div class="day-container non-current-month">4</div> 
+                 <div class="day-container non-current-month">4</div> 
+                 <div class="day-container non-current-month">4</div> 
+                <div class="day-container non-current-month">1</div>  *@
+
+
+             </div>
 
             <div id="side-calendar-area">
                 <div class="side-container"></div>

@@ -25,18 +25,30 @@ namespace HabitCalendar.Controllers
         {
             string? userId = _userManager.GetUserId( User );
 
-            //if ( userId != null )
-            //{
-            //    var userHabitsWithDatesCompleted = _db.Habits
-            //        .Where( h => h.ApplicationUserId == userId )
-            //        .Select( h => new HabitCompletionViewModel
-            //        {
-            //            HabitName = h.HabitName,
-            //            DateHabitCompleted = h.HabitsDaysCompleted.Select( c => c.DateHabitCompleted ).ToList()
-            //        } )
-            //        .ToList();
-            //    return View( userHabitsWithDatesCompleted );
-            //}
+            if ( userId != null )
+            {
+                List<HabitCompletionViewModel> userHabitsWithDatesCompleted =
+                    new List<HabitCompletionViewModel>();
+
+                var userStartDateList = _db.ApplicationUsers
+                    .Where( u => u.Id == userId )
+                    .Select( u => u.UserStartDate )
+                    .First();
+                DateOnly userStartDate = userStartDateList;
+
+                userHabitsWithDatesCompleted = _db.Habits
+                    .Where( h => h.ApplicationUserId == userId )
+                    .Select( h => new HabitCompletionViewModel
+                    {
+                        UserStartDate = userStartDate,
+                        HabitName = h.HabitName,
+                        DateHabitCompleted = h.HabitsDaysCompleted.Select( c => c.DateHabitCompleted ).ToList()
+                    } )
+                    .ToList();
+
+                return View( userHabitsWithDatesCompleted );
+            }
+
             return View();
 
 

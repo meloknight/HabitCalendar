@@ -1,5 +1,6 @@
 using HabitCalendar.Data;
 using HabitCalendar.Models;
+using HabitCalendar.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -24,6 +25,11 @@ namespace HabitCalendar.Controllers
         public IActionResult Index()
         {
             string? userId = _userManager.GetUserId( User );
+
+            if ( userId != null )
+            {
+                CalendarLayout CL = new CalendarLayout( _db, userId );
+            }
 
             if ( userId != null )
             {

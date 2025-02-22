@@ -5,7 +5,6 @@
         <div>
             <div>
                 <h2 class="crud-form__title">Edit Habit</h2>
-                @* <hr /> *@
             </div>
             @* <div asp-validation-summary="ModelOnly"></div> *@
             <div class="crud-form__field">
@@ -27,8 +26,11 @@
                 <input class="crud-form__text-area" asp-for="HabitDescription" />
                 <span asp-validation-for="HabitDescription"></span>
             </div>
-            <button class="crud-form__submit-button" type="submit">Update</button>
-            <a class="crud-form__back-button" asp-controller="Habit" asp-action="Index">Back to Habit List</a>
+            <div class="crud-form__submit-back-buttons">
+                <button class="crud-form__update-button" type="submit">Update</button>
+                <a class="crud-form__back-button" asp-controller="Habit" asp-action="Index">Back to Habit List</a>
+            </div>
+
         </div>
     </form>
 </div>

@@ -12,6 +12,9 @@
     --color-light: #888888;
     --color-white: white;
     --color-nice: #F0CB53;
+    --color-edit: #0094ff;
+    --color-delete: #ff9595;
+    --color-success: #72c762;
 }
 
 /*body{
@@ -64,7 +67,7 @@
     /*    border: 1px solid black;*/
     width: var(--large-screen-day-width);
     content: "";
-    transition: all 0.15s ease-in-out;
+    transition: var(--default-transition);
 }
 .nav__internal-container > li > a:hover {
     color: var(--color-nice);
@@ -81,7 +84,7 @@
 .identity-form-inline button {
     border: none;
     background-color: var(--color-white);
-    transition: all 0.15s ease-in-out;
+    transition: var(--default-transition);
 }
 .identity-form-inline button:hover {
     color: var(--color-nice);
@@ -127,7 +130,7 @@
     border: 1px solid black;
     width: var(--large-screen-day-width);
     height: var(--large-screen-day-width);
-    transition: all 0.5s ease;
+    transition: var(--default-transition);
     padding: 4px;
 }
 .day-container:hover {
@@ -175,14 +178,19 @@
     justify-content: space-between;
 }
 .table-header__temp-data-success {
-    color: #72c762
+    color: var(--color-success);
 }
 .table-header__anchor, .table-header__anchor:active {
     text-decoration: none;
     color: inherit;
 }
-.table-header__anchor i, table-header__anchor:hover {
+.table-header__anchor i {
     color: var(--color-nice);
+    padding-right:3px;
+}
+.table-header__anchor:hover{
+    color: var(--color-nice);
+
 }
 
 /* habit list table block */
@@ -216,34 +224,74 @@
     color: inherit;
 }
 .table__list-edit i, .table__list-edit:hover {
-    color: #0094ff;
+    color: var(--color-edit);
+    padding-right: 3px;
 }
 .table__list-delete i, .table__list-delete:hover {
-    color: #ff9595;
+    color: var(--color-delete);
+    padding-right: 3px;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~ Create/Edit/Delete Habit Sections ~~~~~~~~~~~~~~~~~~~ */
 .form-container{
-    border: 1px solid purple;
-    height: 80vh;
     display: grid;
     justify-content: center;
 }
 .crud-form {
-/*    border: 1px solid orange;*/
-    height: 200px;
+    border: 1px solid black;
+    padding: 10px;
 /*    width: calc(var(--large-screen-day-width)*7 + (10px * 6));*/
     width: 400px;
 }
 .crud-form__field {
-    padding-top: 10px;
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-/*    border: 1px solid black;*/
+    align-items:center;
+    height: 50px;
 }
-.crud-form__input, .crud-form__select {
+.crud-form__label{
+    display: flex;
+    align-items: center;
+}
+.crud-form__input, .crud-form__select, .crud-form__text-area {
     height: 30px;
     padding-left: 2px;
+}
+.crud-form__submit-back-buttons{
+    width:100%;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+.crud-form__create-button {
+    background-color: var(--color-white);
+    padding: 5px;
+    border: 1px solid black;
+}
+.crud-form__create-button:hover {
+    background-color: var(--color-nice);
+}
+.crud-form__update-button{
+    background-color: var(--color-white);
+    padding: 5px;
+    border: 1px solid black;
+}
+.crud-form__update-button:hover{
+    background-color:var(--color-edit);
+}
+.crud-form__delete-button {
+    background-color: var(--color-white);
+    padding: 5px;
+    border: 1px solid black;
+}
+.crud-form__delete-button:hover{
+    background-color:var(--color-delete);
+}
+.crud-form__back-button{
+    text-decoration: none;
+    color: black;
+    display:flex;
+    align-items: center;
 }
 
 

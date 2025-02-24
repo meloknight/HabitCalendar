@@ -22,17 +22,19 @@ namespace HabitCalendar.Utility
         private readonly string _userId;
         internal readonly DateOnly _userStartDate;
         internal readonly List<UserHabitDateModel> _userHabitDates;
-        //private readonly UserManager<IdentityUser> _userManager;
+        internal List<DateOnly> allDates;
+        internal List<CalendarDisplayModel> allDatesWithDetails;
+        internal List<CalendarDisplayModel> currentWeek;
 
         public CalendarLayout( ApplicationDbContext db, string userId )
         {
-            //, UserManager<IdentityUser> userManager
             _db = db;
             _userId = userId;
-            //_userManager = userManager;
             _userStartDate = RetrieveUserStartDate();
             _userHabitDates = RetrieveUserHabitDates();
-
+            allDates = CreateListOfAllDates( _userStartDate );
+            allDatesWithDetails = CreateListOfDatesWithDetails( allDates, _userHabitDates );
+            currentWeek = CreateCurrentWeekListOfDatesWithDetails( allDatesWithDetails );
         }
 
         public DateOnly RetrieveUserStartDate()
@@ -41,10 +43,8 @@ namespace HabitCalendar.Utility
                 .Where( u => u.Id == _userId )
                 .Select( u => u.UserStartDate )
                 .First();
-
             return userStartDate;
         }
-
         public List<UserHabitDateModel> RetrieveUserHabitDates()
         {
             List<UserHabitDateModel> userHabitDates = new List<UserHabitDateModel>();
@@ -53,14 +53,74 @@ namespace HabitCalendar.Utility
                 .Where( h => h.ApplicationUserId == _userId )
                 .Select( h => new UserHabitDateModel
                 {
+                    HabitId = h.HabitId,
                     HabitName = h.HabitName,
+                    HabitDisplayMethod = h.HabitDisplayMethod,
                     DateHabitCompleted = h.HabitsDaysCompleted.Select( c => c.DateHabitCompleted ).ToList()
                 } )
                 .ToList();
-
             return userHabitDates;
         }
+        public List<DateOnly> CreateListOfAllDates( DateOnly userStartDate )
+        {
+            DateOnly currentDate = DateOnly.FromDateTime( DateTime.Today );
+            List<DateOnly> listOfAllDates = new List<DateOnly>();
+            DateOnly dateIncrementer = userStartDate;
+            while ( dateIncrementer != currentDate )
+            {
+                listOfAllDates.Add( dateIncrementer );
+                dateIncrementer = dateIncrementer.AddDays( 1 );
+            }
+            listOfAllDates.Add( currentDate );
+            listOfAllDates.Reverse();
+            return listOfAllDates;
+        }
+        public List<CalendarDisplayModel> CreateListOfDatesWithDetails( List<DateOnly> allDates, List<UserHabitDateModel> userHabitDates )
+        {
+            List<CalendarDisplayModel> allDatesWithDetails = new List<CalendarDisplayModel>();
+
+            foreach ( DateOnly date in allDates )
+            {
+                CalendarDisplayModel dateInfo = new CalendarDisplayModel();
+                dateInfo.Date = date;
+
+                // want to make a list of all habits along with their info
+                foreach ( UserHabitDateModel habit in userHabitDates )
+                {
+                    HabitDisplayModel habitDisplay = new HabitDisplayModel();
+                    habitDisplay.HabitId = habit.HabitId;
+                    habitDisplay.HabitName = habit.HabitName;
+                    habitDisplay.HabitDisplayMethod = habit.HabitDisplayMethod;
+                    habitDisplay.isHabitCompleted = false;
+
+                    foreach ( DateOnly dateHabitCompleted in habit.DateHabitCompleted )
+                    {
+                        if ( dateHabitCompleted == date )
+                        {
+                            habitDisplay.isHabitCompleted = true;
+                        }
+                    }
+
+                    if ( habitDisplay != null )
+                    {
+                        dateInfo.habitsCompleted.Add( habitDisplay );
+                    }
+
+                }
+                allDatesWithDetails.Add( dateInfo );
+            }
+            return allDatesWithDetails;
+        }
+        public List<CalendarDisplayModel> CreateCurrentWeekListOfDatesWithDetails( List<CalendarDisplayModel> allDatesWithDetails )
+        {
+            List<CalendarDisplayModel> currentWeek = new List<CalendarDisplayModel>();
+            foreach ( CalendarDisplayModel detailedDate in allDatesWithDetails )
+            {
+
+            }
 
 
+            return currentWeek;
+        }
     }
 }

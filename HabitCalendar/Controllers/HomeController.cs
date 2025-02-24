@@ -31,6 +31,8 @@ namespace HabitCalendar.Controllers
                 CalendarLayout CL = new CalendarLayout( _db, userId );
             }
 
+            CalendarLayout cl = new CalendarLayout( _db, userId );
+
             if ( userId != null )
             {
                 List<HabitCompletionViewModel> userHabitsWithDatesCompleted =

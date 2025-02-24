@@ -1,10 +1,11 @@
 ﻿namespace HabitCalendar.Models
 {
-    public class UserHabitDateModel
+    public class HabitDisplayModel
     {
         public int HabitId { get; set; }
         public string? HabitName { get; set; }
         public string? HabitDisplayMethod { get; set; }
-        public List<DateOnly> DateHabitCompleted { get; set; } = null!;
+        public bool isHabitCompleted { get; set; }
+
     }
 }

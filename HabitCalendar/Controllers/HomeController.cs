@@ -1,12 +1,14 @@
 using HabitCalendar.Data;
 using HabitCalendar.Models;
 using HabitCalendar.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace HabitCalendar.Controllers
 {
+    [Authorize]
     public class HomeController:Controller
     {
 
@@ -31,12 +33,11 @@ namespace HabitCalendar.Controllers
                 CalendarLayout CL = new CalendarLayout( _db, userId );
             }
 
-            CalendarLayout cl = new CalendarLayout( _db, userId );
-
+            List<HabitCompletionViewModel> userHabitsWithDatesCompleted =
+                new List<HabitCompletionViewModel>();
             if ( userId != null )
             {
-                List<HabitCompletionViewModel> userHabitsWithDatesCompleted =
-                    new List<HabitCompletionViewModel>();
+                CalendarLayout cl = new CalendarLayout( _db, userId );
 
                 var userStartDateList = _db.ApplicationUsers
                     .Where( u => u.Id == userId )
@@ -53,13 +54,13 @@ namespace HabitCalendar.Controllers
                         DateHabitCompleted = h.HabitsDaysCompleted.Select( c => c.DateHabitCompleted ).ToList()
                     } )
                     .ToList();
-
                 return View( userHabitsWithDatesCompleted );
             }
-
-            return View();
-
-
+            else
+            {
+                userHabitsWithDatesCompleted = null;
+                return View( userHabitsWithDatesCompleted );
+            }
         }
 
         public IActionResult Privacy()

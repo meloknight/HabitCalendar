@@ -16,7 +16,6 @@
                 }
             }
         }
-
     }
 }
 
@@ -58,31 +57,34 @@
         @* This section will need to be auto-generated *@
         <div id="calendar-container">
             @{
-                DateOnly userStartDate = Model[0].UserStartDate;
-                int startDay = userStartDate.Day;
-                DateOnly todaysDate = DateOnly.FromDateTime(DateTime.UtcNow);
-                // int todaysDay = todaysDate.Day;
+                if (Model != null) {
+                    DateOnly userStartDate = Model[0].UserStartDate;
+                    int startDay = userStartDate.Day;
+                    DateOnly todaysDate = DateOnly.FromDateTime(DateTime.UtcNow);
+                    // int todaysDay = todaysDate.Day;
 
-                int userStartDateNumber = userStartDate.DayNumber;
-                int todaysDateNumber = todaysDate.DayNumber;
-                int daysElapsedSinceStartDate = todaysDateNumber - userStartDateNumber;
+                    int userStartDateNumber = userStartDate.DayNumber;
+                    int todaysDateNumber = todaysDate.DayNumber;
+                    int daysElapsedSinceStartDate = todaysDateNumber - userStartDateNumber;
 
-                DateOnly incrementerDate = userStartDate;
+                    DateOnly incrementerDate = userStartDate;
 
-                // The starting 7 dates (determine whether visible or not)
-                <div class="day-container"></div>
-                <div class="day-container"></div>
-                <div class="day-container"></div>
-                <div class="day-container"></div>
+                    // The starting 7 dates (determine whether visible or not)
+                    <div class="day-container"></div>
+                    <div class="day-container"></div>
+                    <div class="day-container"></div>
+                    <div class="day-container"></div>
 
-                <div class="day-container current-day">@todaysDate</div>
+                    <div class="day-container current-day">@todaysDate</div>
 
-                for (int i = daysElapsedSinceStartDate-1; i >= 0 ; i--)
-                {
-                    DateOnly incDate = incrementerDate.AddDays(i);
-                    <div class="day-container">@incDate</div>
+                    for (int i = daysElapsedSinceStartDate-1; i >= 0 ; i--)
+                    {
+                        DateOnly incDate = incrementerDate.AddDays(i);
+                        <div class="day-container">@incDate</div>
+                    }
+
+
                 }
-
 
             }
 

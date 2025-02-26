@@ -25,6 +25,7 @@ namespace HabitCalendar.Utility
         internal List<DateOnly> allDates;
         internal List<CalendarDisplayModel> allDatesWithDetails;
         internal List<CalendarDisplayModel> currentWeek;
+        internal List<CalendarDisplayModel> firstWeek;
 
         public CalendarLayout( ApplicationDbContext db, string userId )
         {
@@ -35,6 +36,7 @@ namespace HabitCalendar.Utility
             allDates = CreateListOfAllDates( _userStartDate );
             allDatesWithDetails = CreateListOfDatesWithDetails( allDates, _userHabitDates );
             currentWeek = CreateCurrentWeekListOfDatesWithDetails( allDatesWithDetails );
+            //firstWeek = CreateFirstWeekListOfDatesWithDetails( allDatesWithDetails );
         }
 
         public DateOnly RetrieveUserStartDate()
@@ -83,6 +85,7 @@ namespace HabitCalendar.Utility
             {
                 CalendarDisplayModel dateInfo = new CalendarDisplayModel();
                 dateInfo.Date = date;
+                dateInfo.isVisible = true;
 
                 // want to make a list of all habits along with their info
                 foreach ( UserHabitDateModel habit in userHabitDates )
@@ -113,14 +116,41 @@ namespace HabitCalendar.Utility
         }
         public List<CalendarDisplayModel> CreateCurrentWeekListOfDatesWithDetails( List<CalendarDisplayModel> allDatesWithDetails )
         {
+            // currentWeek will always contain 7 days (even if week is incomplete or
+            // user has not been on app for a full week)
             List<CalendarDisplayModel> currentWeek = new List<CalendarDisplayModel>();
             foreach ( CalendarDisplayModel detailedDate in allDatesWithDetails )
             {
-
+                currentWeek.Add( detailedDate );
+                if ( detailedDate.Date.DayOfWeek == DayOfWeek.Sunday ) { break; }
             }
-
-
+            // grab the furthest day into the week to increment the remaining weekdays from
+            DateOnly tempDateIncrementer = currentWeek[0].Date;
+            currentWeek.Reverse();
+            // Add remaining invisible days for the week
+            while ( tempDateIncrementer.DayOfWeek != DayOfWeek.Saturday )
+            {
+                tempDateIncrementer = tempDateIncrementer.AddDays( 1 );
+                CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateIncrementer );
+                currentWeek.Add( tempDate );
+            }
+            DateOnly tempDateDecrementer = currentWeek[0].Date;
+            while ( currentWeek.Count < 7 )
+            {
+                tempDateDecrementer = tempDateDecrementer.AddDays( -1 );
+                CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateIncrementer );
+                currentWeek.Insert( 0, tempDate );
+            }
             return currentWeek;
+        }
+
+        private CalendarDisplayModel CreateInvisibleDateForCalendar( DateOnly tempDateIncrementer )
+        {
+            CalendarDisplayModel tempDate = new CalendarDisplayModel();
+            tempDate.isVisible = false;
+            tempDate.habitsCompleted = new List<HabitDisplayModel>();
+            tempDate.Date = tempDateIncrementer;
+            return tempDate;
         }
     }
 }

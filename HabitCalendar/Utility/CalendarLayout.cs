@@ -36,7 +36,8 @@ namespace HabitCalendar.Utility
             allDates = CreateListOfAllDates( _userStartDate );
             allDatesWithDetails = CreateListOfDatesWithDetails( allDates, _userHabitDates );
             currentWeek = CreateCurrentWeekListOfDatesWithDetails( allDatesWithDetails );
-            //firstWeek = CreateFirstWeekListOfDatesWithDetails( allDatesWithDetails );
+            firstWeek = CreateFirstWeekListOfDatesWithDetails( allDatesWithDetails );
+            //isCurrentWeekEqualToFirstWeek = checkIfCurrentWeekAndFirstWeekAreSame(currentWeek, firstWeek);
         }
 
         public DateOnly RetrieveUserStartDate()
@@ -119,6 +120,7 @@ namespace HabitCalendar.Utility
             // currentWeek will always contain 7 days (even if week is incomplete or
             // user has not been on app for a full week)
             List<CalendarDisplayModel> currentWeek = new List<CalendarDisplayModel>();
+
             foreach ( CalendarDisplayModel detailedDate in allDatesWithDetails )
             {
                 currentWeek.Add( detailedDate );
@@ -143,6 +145,24 @@ namespace HabitCalendar.Utility
             }
             return currentWeek;
         }
+        public List<CalendarDisplayModel> CreateFirstWeekListOfDatesWithDetails( List<CalendarDisplayModel> allDatesWithDetails )
+        {
+            List<CalendarDisplayModel> firstWeek = new List<CalendarDisplayModel>();
+
+            int lastIndexOfAllDatesWithDetails = allDatesWithDetails.Count - 1;
+
+            for ( int i = lastIndexOfAllDatesWithDetails; i < lastIndexOfAllDatesWithDetails - 7; i-- )
+            {
+
+
+
+            }
+
+
+
+            return firstWeek;
+        }
+
 
         private CalendarDisplayModel CreateInvisibleDateForCalendar( DateOnly tempDateIncrementer )
         {

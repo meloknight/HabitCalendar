@@ -1,5 +1,6 @@
 ﻿using HabitCalendar.Data;
 using HabitCalendar.Models;
+using System.Diagnostics;
 
 namespace HabitCalendar.Utility
 {
@@ -22,10 +23,13 @@ namespace HabitCalendar.Utility
         private readonly string _userId;
         internal readonly DateOnly _userStartDate;
         internal readonly List<UserHabitDateModel> _userHabitDates;
-        internal List<DateOnly> allDates;
-        internal List<CalendarDisplayModel> allDatesWithDetails;
-        internal List<CalendarDisplayModel> currentWeek;
+        internal readonly List<DateOnly> allDates;
+        internal readonly List<CalendarDisplayModel> allDatesWithDetails;
+        internal readonly List<CalendarDisplayModel> currentWeek;
         internal List<CalendarDisplayModel> firstWeek;
+        private readonly bool isCurrentWeekEqualToFirstWeek;
+        private readonly bool isCurrentWeekDirectlyAfterFirstWeek;
+        private readonly List<CalendarDisplayModel> remainingWeeks;
 
         public CalendarLayout( ApplicationDbContext db, string userId )
         {
@@ -37,7 +41,19 @@ namespace HabitCalendar.Utility
             allDatesWithDetails = CreateListOfDatesWithDetails( allDates, _userHabitDates );
             currentWeek = CreateCurrentWeekListOfDatesWithDetails( allDatesWithDetails );
             firstWeek = CreateFirstWeekListOfDatesWithDetails( allDatesWithDetails );
-            //isCurrentWeekEqualToFirstWeek = checkIfCurrentWeekAndFirstWeekAreSame(currentWeek, firstWeek);
+            isCurrentWeekEqualToFirstWeek = checkIfCurrentWeekAndFirstWeekAreSame( currentWeek, firstWeek );
+            isCurrentWeekDirectlyAfterFirstWeek = checkedIfCurrentWeekDirectlyAfterFirstWeek( currentWeek, firstWeek );
+            //updateFirstWeekIfCurrentWeekEqualToFirstWeek( firstWeek, isCurrentWeekEqualToFirstWeek );
+            remainingWeeks = CreateRemainingWeekListOfDatesWithDetails( allDatesWithDetails, firstWeek, currentWeek, isCurrentWeekEqualToFirstWeek, isCurrentWeekDirectlyAfterFirstWeek );
+        }
+
+        private bool checkedIfCurrentWeekDirectlyAfterFirstWeek( List<CalendarDisplayModel> currentWeek, List<CalendarDisplayModel> firstWeek )
+        {
+            bool isCurrentWeekDirectlyAfterFirstWeek = false;
+            DateOnly tempDate = firstWeek[6].Date;
+            tempDate = tempDate.AddDays( 1 );
+            if ( currentWeek[0].Date == tempDate ) { isCurrentWeekDirectlyAfterFirstWeek = true; }
+            return isCurrentWeekDirectlyAfterFirstWeek;
         }
 
         public DateOnly RetrieveUserStartDate()
@@ -140,7 +156,7 @@ namespace HabitCalendar.Utility
             while ( currentWeek.Count < 7 )
             {
                 tempDateDecrementer = tempDateDecrementer.AddDays( -1 );
-                CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateIncrementer );
+                CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateDecrementer );
                 currentWeek.Insert( 0, tempDate );
             }
             return currentWeek;
@@ -151,18 +167,67 @@ namespace HabitCalendar.Utility
 
             int lastIndexOfAllDatesWithDetails = allDatesWithDetails.Count - 1;
 
-            for ( int i = lastIndexOfAllDatesWithDetails; i < lastIndexOfAllDatesWithDetails - 7; i-- )
+            for ( int i = lastIndexOfAllDatesWithDetails; i > lastIndexOfAllDatesWithDetails - 7; i-- )
             {
-
-
-
+                // grab from the last index and decrement until Saturday is hit, then break.
+                firstWeek.Add( allDatesWithDetails[i] );
+                if ( allDatesWithDetails[i].Date.DayOfWeek == DayOfWeek.Saturday ) { break; }
             }
-
-
-
+            // fill the remainder of firstWeek with invisible Dates in sequence.
+            DateOnly tempDateDecrementer = firstWeek[0].Date;
+            while ( firstWeek.Count < 7 )
+            {
+                tempDateDecrementer = tempDateDecrementer.AddDays( -1 );
+                CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateDecrementer );
+                firstWeek.Insert( 0, tempDate );
+            }
             return firstWeek;
         }
 
+        private bool checkIfCurrentWeekAndFirstWeekAreSame( List<CalendarDisplayModel> currentWeek, List<CalendarDisplayModel> firstWeek )
+        {
+            bool isCurrentWeekEqualToFirstWeek = false;
+            Debug.Assert( currentWeek.Count == 7, "currentWeek does not have 7 CalendarDisplayModels in it." );
+            Debug.Assert( firstWeek.Count == 7, "firstWeek does not have 7 CalendarDisplayModels in it." );
+            for ( int i = 0; i < 7; i++ )
+            {
+                if ( currentWeek[i] == firstWeek[i] )
+                {
+                    isCurrentWeekEqualToFirstWeek = true;
+                }
+            }
+            return isCurrentWeekEqualToFirstWeek;
+        }
+
+        private List<CalendarDisplayModel> CreateRemainingWeekListOfDatesWithDetails(
+            List<CalendarDisplayModel> allDatesWithDetails,
+            List<CalendarDisplayModel> firstWeek,
+            List<CalendarDisplayModel> currentWeek,
+            bool isCurrentWeekEqualToFirstWeek,
+            bool isCurrentWeekDirectlyAfterFirstWeek )
+        {
+            List<CalendarDisplayModel> remainingWeeks = new List<CalendarDisplayModel>();
+            if ( isCurrentWeekEqualToFirstWeek == true ) { return remainingWeeks; }
+            if ( isCurrentWeekDirectlyAfterFirstWeek == true ) { return remainingWeeks; }
+            DateOnly startDate = currentWeek[0].Date;
+            DateOnly endDate = firstWeek[6].Date;
+            bool isDateAddable = false;
+            foreach ( CalendarDisplayModel day in allDatesWithDetails )
+            {
+                if ( day.Date == endDate ) { isDateAddable = false; }
+                if ( isDateAddable == true )
+                {
+                    remainingWeeks.Add( day );
+                }
+                if ( day.Date == startDate ) { isDateAddable = true; }
+            }
+            return remainingWeeks;
+        }
+
+        //private void updateFirstWeekIfCurrentWeekEqualToFirstWeek( List<CalendarDisplayModel> firstWeek, bool isCurrentWeekEqualToFirstWeek )
+        //{
+        //    if ( isCurrentWeekEqualToFirstWeek == true ) { firstWeek = new List<CalendarDisplayModel>(); }
+        //}
 
         private CalendarDisplayModel CreateInvisibleDateForCalendar( DateOnly tempDateIncrementer )
         {

@@ -1,22 +1,8 @@
 ﻿@using HabitCalendar.Models
-@model List<HabitCompletionViewModel>
+@model CalendarInfoModel;
 
 @{
     ViewData["Title"] = "Home Page";
-}
-
-@{
-    if (Model != null) {
-        <h2>@Model[0].UserStartDate</h2>
-        foreach(var obj in Model) {
-            if(obj.DateHabitCompleted.Count() > 0) {
-                <h1>@obj.HabitName</h1>
-                for(int i = 0; i < obj.DateHabitCompleted.Count(); i++) {
-                    <h3>@obj.DateHabitCompleted[i]</h3>
-                }
-            }
-        }
-    }
 }
 
 <section id="calendar-section">
@@ -34,7 +20,7 @@
     <div id="greater-calendar-container">
 
         @* This section will need to be automated *@
-        <div id="side-calendar-area">
+@*         <div id="side-calendar-area">
             <div class="side-container">- Feb 2025 -</div>
             <div class="side-container"></div>
             <div class="side-container"></div>
@@ -52,88 +38,24 @@
                     Jan 2025
                 </div>
             </div>
-        </div>
+        </div> *@
 
-        @* This section will need to be auto-generated *@
+       
         <div id="calendar-container">
             @{
                 if (Model != null) {
-                    DateOnly userStartDate = Model[0].UserStartDate;
-                    int startDay = userStartDate.Day;
-                    DateOnly todaysDate = DateOnly.FromDateTime(DateTime.UtcNow);
-                    // int todaysDay = todaysDate.Day;
+                    foreach(CalendarDisplayModel curr in Model.currentWeek){
+                        if (curr.isVisible == true) {
 
-                    int userStartDateNumber = userStartDate.DayNumber;
-                    int todaysDateNumber = todaysDate.DayNumber;
-                    int daysElapsedSinceStartDate = todaysDateNumber - userStartDateNumber;
+                        }
 
-                    DateOnly incrementerDate = userStartDate;
 
-                    // The starting 7 dates (determine whether visible or not)
-                    <div class="day-container"></div>
-                    <div class="day-container"></div>
-                    <div class="day-container"></div>
-                    <div class="day-container"></div>
-
-                    <div class="day-container current-day">@todaysDate</div>
-
-                    for (int i = daysElapsedSinceStartDate-1; i >= 0 ; i--)
-                    {
-                        DateOnly incDate = incrementerDate.AddDays(i);
-                        <div class="day-container">@incDate</div>
                     }
-
-
                 }
-
             }
-
-
-
-
-
-
-
-
-@*                 @{
-                     for(int i = 30; i > 1; i--) 
-                     { 
-                       <div class="day-container">@i</div> 
-                     } 
-                 } 
-                 <div class="day-container current-day">1</div> 
-                 <div class="day-container day-not-visible">16</div> 
-                 <div class="day-container">15</div> 
-                 <div class="day-container">14</div> 
-                 <div class="day-container">13</div> 
-                 <div class="day-container">12</div> 
-                 <div class="day-container">11</div> 
-                 <div class="day-container">10</div> 
-                 <div class="day-container day-not-visible">9</div> 
-                 <div class="day-container">8</div> 
-                 <div class="day-container">7</div> 
-                 <div class="day-container day-not-visible">6</div> 
-                 <div class="day-container">5</div> 
-                 <div class="day-container">4</div> 
-                 <div class="day-container">4</div> 
-                 <div class="day-container">4</div> 
-                <div class="day-container">4</div> 
-                <div class="day-container">4</div> 
-                <div class="day-container"><i class="fa-solid fa-xmark"></i></div> 
-                 <div class="day-container day-not-visible">4</div> 
-                 <div class="day-container non-current-month">4</div> 
-                 <div class="day-container non-current-month">4</div> 
-                 <div class="day-container non-current-month">4</div> 
-                 <div class="day-container non-current-month">4</div> 
-                 <div class="day-container non-current-month">4</div> 
-                 <div class="day-container non-current-month">4</div> 
-                 <div class="day-container non-current-month">4</div> 
-                <div class="day-container non-current-month">1</div>  *@
-
-
              </div>
 
-            <div id="side-calendar-area">
+@*             <div id="side-calendar-area">
                 <div class="side-container"></div>
                 <div class="side-container"></div>
                 <div class="side-container"></div>
@@ -143,11 +65,6 @@
                 <div class="side-container"></div>
                 <div class="side-container"></div>
                 <div class="side-container"></div>
-            </div>
+            </div> *@
         </div>
     </section>
-
-
-
-@* text-center *@
-@* display-4 *@

@@ -17,7 +17,6 @@ namespace HabitCalendar.Utility
         // This must start from the starting day and go to Sunday (if they have used app
         // long enough)
         // - The Third list contains the remaining days not included in current week and first week
-        // - The Fourth List will include the months and help position them to left of calendar
 
         private readonly ApplicationDbContext _db;
         private readonly string _userId;
@@ -29,7 +28,7 @@ namespace HabitCalendar.Utility
         internal List<CalendarDisplayModel> firstWeek;
         private readonly bool isCurrentWeekEqualToFirstWeek;
         private readonly bool isCurrentWeekDirectlyAfterFirstWeek;
-        private readonly List<CalendarDisplayModel> remainingWeeks;
+        internal readonly List<CalendarDisplayModel> remainingWeeks;
 
         public CalendarLayout( ApplicationDbContext db, string userId )
         {
@@ -43,8 +42,9 @@ namespace HabitCalendar.Utility
             firstWeek = CreateFirstWeekListOfDatesWithDetails( allDatesWithDetails );
             isCurrentWeekEqualToFirstWeek = checkIfCurrentWeekAndFirstWeekAreSame( currentWeek, firstWeek );
             isCurrentWeekDirectlyAfterFirstWeek = checkIfCurrentWeekDirectlyAfterFirstWeek( currentWeek, firstWeek );
-            //updateFirstWeekIfCurrentWeekEqualToFirstWeek( firstWeek, isCurrentWeekEqualToFirstWeek );
-            remainingWeeks = CreateRemainingWeekListOfDatesWithDetails( allDatesWithDetails, firstWeek, currentWeek, isCurrentWeekEqualToFirstWeek, isCurrentWeekDirectlyAfterFirstWeek );
+            remainingWeeks = CreateRemainingWeekListOfDatesWithDetails(
+                allDatesWithDetails, firstWeek, currentWeek, isCurrentWeekEqualToFirstWeek, isCurrentWeekDirectlyAfterFirstWeek );
+            updateFirstWeekIfCurrentWeekEqualToFirstWeek( firstWeek, isCurrentWeekEqualToFirstWeek );
         }
         public DateOnly RetrieveUserStartDate()
         {
@@ -154,47 +154,31 @@ namespace HabitCalendar.Utility
         public List<CalendarDisplayModel> CreateFirstWeekListOfDatesWithDetails( List<CalendarDisplayModel> allDatesWithDetails )
         {
             List<CalendarDisplayModel> firstWeek = new List<CalendarDisplayModel>();
-
+            int allDatesWithDetailsCountOrSevenDays = Math.Min( allDatesWithDetails.Count, 7 );
             int lastIndexOfAllDatesWithDetails = allDatesWithDetails.Count - 1;
 
-            if ( allDatesWithDetails.Count < 7 )
+            for ( int i = lastIndexOfAllDatesWithDetails; i > lastIndexOfAllDatesWithDetails - allDatesWithDetailsCountOrSevenDays; i-- )
             {
-                int decrementer = lastIndexOfAllDatesWithDetails;
-                while ( decrementer >= 0 && firstWeek[decrementer].Date.DayOfWeek )
-                {
-                    firstWeek.Add( allDatesWithDetails[decrementer] );
-                    decrementer -= 1;
-                }
-                // fill days before existing dates up to Sunday
-                if ( firstWeek[0].Date.DayOfWeek != DayOfWeek.Sunday )
-                {
-
-                }
-
-
-                // fill days after existing dates up to Saturday
-
-
-
+                // grab from the last index and decrement until Saturday is hit, then break.
+                firstWeek.Add( allDatesWithDetails[i] );
+                if ( allDatesWithDetails[i].Date.DayOfWeek == DayOfWeek.Saturday ) { break; }
             }
-            else
+            // fill the remainder of firstWeek with invisible Dates in sequence.
+            DateOnly tempDateDecrementer = firstWeek[0].Date;
+            while ( tempDateDecrementer.DayOfWeek != DayOfWeek.Sunday )
             {
-                for ( int i = lastIndexOfAllDatesWithDetails; i > lastIndexOfAllDatesWithDetails - 7; i-- )
-                {
-                    // grab from the last index and decrement until Saturday is hit, then break.
-                    firstWeek.Add( allDatesWithDetails[i] );
-                    if ( allDatesWithDetails[i].Date.DayOfWeek == DayOfWeek.Saturday ) { break; }
-                }
-                // fill the remainder of firstWeek with invisible Dates in sequence.
-                DateOnly tempDateDecrementer = firstWeek[0].Date;
-                while ( firstWeek.Count < 7 )
-                {
-                    tempDateDecrementer = tempDateDecrementer.AddDays( -1 );
-                    CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateDecrementer );
-                    firstWeek.Insert( 0, tempDate );
-                }
+                tempDateDecrementer = tempDateDecrementer.AddDays( -1 );
+                CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateDecrementer );
+                firstWeek.Insert( 0, tempDate );
             }
-
+            int firstWeekFinalIndex = firstWeek.Count - 1;
+            DateOnly tempDateIncrementer = firstWeek[firstWeekFinalIndex].Date;
+            while ( firstWeek.Count < 7 )
+            {
+                tempDateIncrementer = tempDateIncrementer.AddDays( 1 );
+                CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateIncrementer );
+                firstWeek.Add( tempDate );
+            };
 
             return firstWeek;
         }
@@ -244,10 +228,10 @@ namespace HabitCalendar.Utility
             }
             return remainingWeeks;
         }
-        //private void updateFirstWeekIfCurrentWeekEqualToFirstWeek( List<CalendarDisplayModel> firstWeek, bool isCurrentWeekEqualToFirstWeek )
-        //{
-        //    if ( isCurrentWeekEqualToFirstWeek == true ) { firstWeek = new List<CalendarDisplayModel>(); }
-        //}
+        private void updateFirstWeekIfCurrentWeekEqualToFirstWeek( List<CalendarDisplayModel> firstWeek, bool isCurrentWeekEqualToFirstWeek )
+        {
+            if ( isCurrentWeekEqualToFirstWeek == true ) { firstWeek = new List<CalendarDisplayModel>(); }
+        }
         private CalendarDisplayModel CreateInvisibleDateForCalendar( DateOnly tempDateIncrementer )
         {
             CalendarDisplayModel tempDate = new CalendarDisplayModel();

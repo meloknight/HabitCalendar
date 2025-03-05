@@ -112,7 +112,7 @@
 #greater-calendar-container {
     display: flex;
 }
-#side-calendar-area {
+.side-calendar-area {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;

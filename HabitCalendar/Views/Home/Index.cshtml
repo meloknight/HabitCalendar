@@ -20,7 +20,7 @@
     <div id="greater-calendar-container">
 
         @* This section will need to be automated *@
-@*         <div id="side-calendar-area">
+        @*         <div id="side-calendar-area">
             <div class="side-container">- Feb 2025 -</div>
             <div class="side-container"></div>
             <div class="side-container"></div>
@@ -40,16 +40,55 @@
             </div>
         </div> *@
 
-       
+
         <div id="calendar-container">
             @{
                 if (Model != null) {
+                    DateTime currentDateTime = DateTime.Now;
+                    DateOnly currentDate = DateOnly.FromDateTime(currentDateTime);
                     foreach(CalendarDisplayModel curr in Model.currentWeek){
-                        if (curr.isVisible == true) {
-
+                        if(curr.isVisible == true && curr.Date == currentDate){
+                            <div class="day-container current-day">@curr.Date.Day</div>
+                        }   
+                        else if (curr.isVisible == true) {
+                            <div class="day-container">@curr.Date.Day</div>
+                        } else {
+                            <div class="day-container day-not-visible"></div>
                         }
+                    }
+                }
+            }
 
+            @{
+                if (Model != null && Model.remainingWeeks.Count > 0)
+                {
+                    foreach (CalendarDisplayModel remain in Model.remainingWeeks)
+                    {
+                        if (remain.isVisible == true)
+                        {
+                            <div class="day-container">@remain.Date.Day</div>
+                        }
+                        else
+                        {
+                            <div class="day-container day-not-visible"></div>
+                        }
+                    }
+                }
+            }
 
+            @{
+                if (Model != null && Model.firstWeek.Count > 0)
+                {
+                    foreach (CalendarDisplayModel first in Model.firstWeek)
+                    {
+                        if (first.isVisible == true)
+                        {
+                            <div class="day-container">@first.Date.Day</div>
+                        }
+                        else
+                        {
+                            <div class="day-container day-not-visible"></div>
+                        }
                     }
                 }
             }

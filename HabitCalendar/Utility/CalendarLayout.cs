@@ -4,7 +4,6 @@ using System.Diagnostics;
 
 namespace HabitCalendar.Utility
 {
-
     public class CalendarLayout
     {
         // What I want from this?
@@ -226,7 +225,18 @@ namespace HabitCalendar.Utility
                 }
                 if ( day.Date == startDate ) { isDateAddable = true; }
             }
-            return remainingWeeks;
+
+            // reverse each 7 days so they are laid out correctly for display.
+            List<CalendarDisplayModel> remainingWeeksCorrected = new List<CalendarDisplayModel>();
+            int weekCount = remainingWeeks.Count / 7;
+            for ( int i = 0; i < weekCount; i++ )
+            {
+                List<CalendarDisplayModel> tempDateList = remainingWeeks.GetRange( i * 7, 7 );
+                tempDateList.Reverse();
+                remainingWeeksCorrected.AddRange( tempDateList );
+            }
+
+            return remainingWeeksCorrected;
         }
         private void updateFirstWeekIfCurrentWeekEqualToFirstWeek( List<CalendarDisplayModel> firstWeek, bool isCurrentWeekEqualToFirstWeek )
         {

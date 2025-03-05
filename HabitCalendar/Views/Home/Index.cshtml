@@ -44,8 +44,7 @@
         <div id="calendar-container">
             @{
                 if (Model != null) {
-                    DateTime currentDateTime = DateTime.Now;
-                    DateOnly currentDate = DateOnly.FromDateTime(currentDateTime);
+                    DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
                     foreach(CalendarDisplayModel curr in Model.currentWeek){
                         if(curr.isVisible == true && curr.Date == currentDate){
                             <div class="day-container current-day">@curr.Date.Day</div>

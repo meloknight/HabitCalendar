@@ -18,39 +18,57 @@
     </div>
 
     <div id="greater-calendar-container">
-
-        @* This section will need to be automated *@
-        @*         <div class="side-calendar-area">
-            <div class="side-container">- Feb 2025 -</div>
-            <div class="side-container"></div>
-            <div class="side-container"></div>
-            <div class="side-container">
-                <i class="fa-solid fa-arrow-up"></i>
-                <div>
-                    Feb 2025
-                </div>
-            </div>
-            <div class="side-container"></div>
-            <div class="side-container"></div>
-            <div class="side-container">
-                <i class="fa-solid fa-arrow-up"></i>
-                <div>
-                    Jan 2025
-                </div>
-            </div>
-        </div> *@
-
         @{
+            DateOnly todaysDate = DateOnly.FromDateTime(DateTime.Today);
             <div class="side-calendar-area">
-            
-            
+                @{
+                    if (Model.currentWeek.Count > 0){
+                        <div class="side-container"> - @todaysDate.Month / @todaysDate.Year - </div>
+                    }
+
+                    if (Model.remainingWeeks.Count > 0) {
+                        int weekIncrementer = 0;
+                        bool isNewMonth = false;
+                        foreach(CalendarDisplayModel day in Model.remainingWeeks){
+                            if (weekIncrementer >= 7){ weekIncrementer = 0; }
+                            if (day.Date.Day == 1) {
+                                isNewMonth = true;
+                            }
+                            if (weekIncrementer == 6) {
+                                if (isNewMonth == true) {
+                                    <div class="side-container">
+                                        <i class="fa-solid fa-arrow-up"></i>
+                                        <div>
+                                            @day.Date.Month / @day.Date.Year
+                                        </div>
+                                    </div>
+                                } else {
+                                    <div class="side-container"></div>
+                                }
+                                isNewMonth = false;
+                            }
+                            weekIncrementer++;
+                        }
+                    }
+
+                    if (Model.firstWeek.Count > 0) {
+                        bool isNewMonthInFirstWeek = false;
+                        foreach (CalendarDisplayModel day in Model.firstWeek) {
+                            if (day.Date.Day == 1) {
+                                isNewMonthInFirstWeek = true;
+                            }
+                        }
+                        if (isNewMonthInFirstWeek == true) {
+                            <div class="side-container"> - @todaysDate.Month - @todaysDate.Year - </div>
+
+                        } else {
+                            <div class="side-container"></div>
+                        }
+                    }
+                }
+
             </div>
-
-            
         }
-
-
-
         <div id="calendar-container">
             @{
                 if (Model != null) {
@@ -101,18 +119,20 @@
                     }
                 }
             }
-             </div>
+        </div>
 
-@*             <div class="side-calendar-area">
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-                <div class="side-container"></div>
-            </div> *@
+        <div class="side-calendar-area">
+            @{
+                int weeksCountRightSide = 0;
+                if (Model.currentWeek.Count > 0) { weeksCountRightSide++; }
+                if (Model.firstWeek.Count > 0) { weeksCountRightSide++; }
+                if (Model.remainingWeeks.Count > 0) {
+                    weeksCountRightSide += Model.remainingWeeks.Count / 7;
+                }
+                for (int i = 0; i < weeksCountRightSide; i++) {
+                    <div class="side-container"></div>
+                }
+            }
+            </div>
         </div>
     </section>

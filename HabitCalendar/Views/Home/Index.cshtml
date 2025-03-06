@@ -22,8 +22,9 @@
             DateOnly todaysDate = DateOnly.FromDateTime(DateTime.Today);
             <div class="side-calendar-area">
                 @{
+                    
                     if (Model.currentWeek.Count > 0){
-                        <div class="side-container"> - @todaysDate.Month / @todaysDate.Year - </div>
+                        <div class="side-container"> - @Model.monthNames[todaysDate.Month - 1] / @todaysDate.Year - </div>
                     }
 
                     if (Model.remainingWeeks.Count > 0) {
@@ -39,7 +40,7 @@
                                     <div class="side-container">
                                         <i class="fa-solid fa-arrow-up"></i>
                                         <div>
-                                            @day.Date.Month / @day.Date.Year
+                                            @Model.monthNames[day.Date.Month -1] / @day.Date.Year
                                         </div>
                                     </div>
                                 } else {
@@ -53,13 +54,22 @@
 
                     if (Model.firstWeek.Count > 0) {
                         bool isNewMonthInFirstWeek = false;
+                        int newMonthNumber = 0;
+                        int newYearNumber = 0;
                         foreach (CalendarDisplayModel day in Model.firstWeek) {
                             if (day.Date.Day == 1) {
                                 isNewMonthInFirstWeek = true;
+                                newMonthNumber = day.Date.Month;
+                                newYearNumber = day.Date.Year;
                             }
                         }
                         if (isNewMonthInFirstWeek == true) {
-                            <div class="side-container"> - @todaysDate.Month - @todaysDate.Year - </div>
+                            <div class="side-container">
+                                <i class="fa-solid fa-arrow-up"></i>
+                                <div>
+                                    @Model.monthNames[newMonthNumber - 1] / @newYearNumber
+                                </div>
+                            </div>
 
                         } else {
                             <div class="side-container"></div>

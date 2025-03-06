@@ -27,10 +27,22 @@
                 <li class="nav__list-item"><a href="#"></a></li>
                 <li class="nav__list-item"><a href="#"></a></li>
                 <li class="nav__list-item"><a href="#"></a></li>
+
                 @* The two nav Identity links *@
                 @if (SignInManager.IsSignedIn(User)){
                     <li class="nav-identity-item nav__list-item">
-                        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                        @{
+                            string userEmail = UserManager.GetUserName(User);
+                            string userName = "";
+                            int atIndex = userEmail.IndexOf('@');
+                            if (atIndex >= 0) {
+                                userName = userEmail.Substring(0, atIndex);
+                            } else {
+                                userName = userEmail;
+                            }
+
+                            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@userName</a>
+                        }
                     </li>
                     <li class="nav-identity-item nav__list-item">
                         <form id="logoutForm" class="identity-form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -82,7 +94,7 @@
         </main>
     </div>
 
-   @*  <footer class="border-top footer text-muted">
+@*     <footer>
         <div class="container">
             &copy; 2024 - HabitCalendar - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

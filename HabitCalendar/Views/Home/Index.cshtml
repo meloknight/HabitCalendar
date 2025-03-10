@@ -87,9 +87,14 @@
                         if(curr.isVisible == true && curr.Date == currentDate){
                             <div class="day-container current-day">@curr.Date.Day</div>
                         }   
-                        else if (curr.isVisible == true) {
+                        else if (curr.isVisible == true && currentDate.Month == curr.Date.Month) {
                             <div class="day-container">@curr.Date.Day</div>
-                        } else {
+                        }
+                        else if (curr.isVisible == true && currentDate.Month != curr.Date.Month)
+                        {
+                            <div class="day-container non-current-month">@curr.Date.Day</div>
+                        }
+                        else {
                             <div class="day-container day-not-visible"></div>
                         }
                     }
@@ -99,11 +104,15 @@
             @{
                 if (Model != null && Model.remainingWeeks.Count > 0)
                 {
+                    DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
                     foreach (CalendarDisplayModel remain in Model.remainingWeeks)
                     {
-                        if (remain.isVisible == true)
+                        if (remain.isVisible == true && currentDate.Month == remain.Date.Month)
                         {
                             <div class="day-container">@remain.Date.Day</div>
+                        }
+                        else if (remain.isVisible == true && currentDate.Month != remain.Date.Month){
+                            <div class="day-container non-current-month">@remain.Date.Day</div>
                         }
                         else
                         {
@@ -116,11 +125,15 @@
             @{
                 if (Model != null && Model.firstWeek.Count > 0)
                 {
+                    DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
                     foreach (CalendarDisplayModel first in Model.firstWeek)
                     {
-                        if (first.isVisible == true)
+                        if (first.isVisible == true && currentDate.Month == first.Date.Month)
                         {
                             <div class="day-container">@first.Date.Day</div>
+                        }
+                        else if (first.isVisible == true && currentDate.Month != first.Date.Month){
+                            <div class="day-container non-current-month">@first.Date.Day</div>
                         }
                         else
                         {

@@ -152,7 +152,6 @@
     border: none;
     visibility: hidden;
 }
-
 .current-day {
     border: 1px solid var(--color-nice);
 }

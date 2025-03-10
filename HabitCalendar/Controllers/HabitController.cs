@@ -1,5 +1,6 @@
 ﻿using HabitCalendar.Data;
 using HabitCalendar.Models;
+using HabitCalendar.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,22 +18,32 @@ namespace HabitCalendar.Controllers
         }
         public IActionResult Index()
         {
-            var userId = _userManager.GetUserId( User );
+            string? userId = _userManager.GetUserId( User );
+
             if ( userId == null )
             {
                 string? returnUrl = Url.Action( "Index", "Home" );
                 return RedirectToPage( "/Account/Login", new { area = "Identity", returnUrl } );
             }
-            List<Habit> habitList = _db.Habits
-                .Where( h => h.ApplicationUserId == userId )
-                .ToList();
 
-            //List<Habit> objHabitList = _db.Habits.ToList();
-            return View( habitList );
+            queryDatabase qD = new queryDatabase();
+            List<Habit> habitList = qD.generateHabitList( _db, userId );
+
+            return base.View( habitList );
         }
 
         public IActionResult Create()
         {
+            string? userId = _userManager.GetUserId( User );
+            queryDatabase qD = new queryDatabase();
+            List<Habit> habitList = qD.generateHabitList( _db, userId );
+            List<string> currentHabitDisplays = new List<string>();
+            foreach ( Habit habit in habitList )
+            {
+                currentHabitDisplays.Add( habit.HabitDisplayMethod );
+            }
+            ViewBag.currentHabitDisplays = currentHabitDisplays;
+
             return View();
         }
         [HttpPost]
@@ -66,8 +77,6 @@ namespace HabitCalendar.Controllers
                 return NotFound();
             }
             Habit? HabitFromDb = _db.Habits.Find( habitId );
-            //Habit? HabitFromDb1 = _db.Habits.FirstOrDefault( u => u.HabitId == habitId );
-            //Habit? HabitFromDb2 = _db.Habits.Where( u => u.HabitId == habitId ).FirstOrDefault();
             if ( HabitFromDb == null )
             {
                 return NotFound();

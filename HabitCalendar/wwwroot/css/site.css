@@ -211,6 +211,7 @@
     margin-bottom: 10px;
     padding: 8px;
     min-height: 50px;
+    overflow-wrap: anywhere;
 }
 .table__anchor, .table__anchor:active {
     text-decoration: none;

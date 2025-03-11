@@ -10,7 +10,7 @@
             <div class="crud-form__field">
                 <label class="crud-form__label" asp-for="HabitName"></label>
                 <input class="crud-form__input" asp-for="HabitName" />
-                <span asp-validation-for="HabitName"></span>
+                <span class="crud-form__validation"  asp-validation-for="HabitName"></span>
             </div>
             <div class="crud-form__field">
                 <label class="crud-form__label" asp-for="HabitDisplayMethod"></label>
@@ -44,7 +44,7 @@
             <div class="crud-form__field">
                 <label class="crud-form__label" asp-for="HabitDescription"></label>
                 <input class="crud-form__text-area" asp-for="HabitDescription" />
-                <span asp-validation-for="HabitDescription"></span>
+                <span class="crud-form__validation"  asp-validation-for="HabitDescription"></span>
             </div>
             <div class="crud-form__submit-back-buttons">
                 <button class="crud-form__create-button" type="submit">Create</button>

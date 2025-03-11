@@ -25,7 +25,8 @@
                             {
                                 if ( curr == habitDisplayMethod ) { isDisplayMethodAvailable = false; }
                             }
-                            if ( isDisplayMethodAvailable == true )
+
+                            if ( isDisplayMethodAvailable == true || Model.HabitDisplayMethod == habitDisplayMethod )
                             {
                                 <option value="@habitDisplayMethod">@habitDisplayMethod</option>
                             }

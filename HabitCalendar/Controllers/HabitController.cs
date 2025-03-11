@@ -26,7 +26,7 @@ namespace HabitCalendar.Controllers
                 return RedirectToPage( "/Account/Login", new { area = "Identity", returnUrl } );
             }
 
-            queryDatabase qD = new queryDatabase();
+            queryDatabase qD = new();
             List<Habit> habitList = qD.generateHabitList( _db, userId );
 
             return base.View( habitList );
@@ -81,6 +81,16 @@ namespace HabitCalendar.Controllers
             {
                 return NotFound();
             }
+            string? userId = _userManager.GetUserId( User );
+            queryDatabase qD = new queryDatabase();
+            List<Habit> habitList = qD.generateHabitList( _db, userId );
+            List<string> currentHabitDisplays = new List<string>();
+            foreach ( Habit habit in habitList )
+            {
+                currentHabitDisplays.Add( habit.HabitDisplayMethod );
+            }
+            ViewBag.currentHabitDisplays = currentHabitDisplays;
+
             return View( HabitFromDb );
         }
         [HttpPost]

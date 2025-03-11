@@ -6,7 +6,7 @@
             <div>
                 <h2 class="crud-form__title">Create Habit</h2>
             </div>
-             @* <div asp-validation-summary="ModelOnly"></div> *@
+            @* <div asp-validation-summary="ModelOnly"></div> *@
             <div class="crud-form__field">
                 <label class="crud-form__label" asp-for="HabitName"></label>
                 <input class="crud-form__input" asp-for="HabitName" />
@@ -15,13 +15,31 @@
             <div class="crud-form__field">
                 <label class="crud-form__label" asp-for="HabitDisplayMethod"></label>
                 <select class="crud-form__select" asp-for="HabitDisplayMethod">
-                    <option value="big-x">Big X</option>
+                    @{
+                        string[] habitDisplayMethods = { "Big X", "Short Text", "Circle", "Star", "Long Text" };
+                        foreach (string habitDisplayMethod in habitDisplayMethods)
+                        {
+                            bool isDisplayMethodAvailable = true;
+                            foreach (string curr in ViewBag.currentHabitDisplays)
+                            {
+                                if (curr == habitDisplayMethod) { isDisplayMethodAvailable = false; }
+                            }
+                            if (isDisplayMethodAvailable == true)
+                            {
+                                <option value="@habitDisplayMethod">@habitDisplayMethod</option>
+                            } else
+                            {
+                                <option value="@habitDisplayMethod" disabled>@habitDisplayMethod</option>
+                            }
+                        }
+                    }
+
+@*                     <option value="big-x">Big X</option>
                     <option value="short-text">Short Text</option>
                     <option value="circle">Circle</option>
                     <option value="star">Star</option>
-                    <option value="long-text">Long Text</option>
+                    <option value="long-text">Long Text</option> *@
                 </select>
-                 @* <span asp-validation-for="HabitDisplayMethod"></span> *@
             </div>
             <div class="crud-form__field">
                 <label class="crud-form__label" asp-for="HabitDescription"></label>

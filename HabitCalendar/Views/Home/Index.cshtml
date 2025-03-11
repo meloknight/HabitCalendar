@@ -22,7 +22,7 @@
             DateOnly todaysDate = DateOnly.FromDateTime(DateTime.Today);
             <div class="side-calendar-area">
                 @{
-                    
+
                     if (Model.currentWeek.Count > 0){
                         <div class="side-container"> - @Model.monthNames[todaysDate.Month - 1] / @todaysDate.Year - </div>
                     }
@@ -107,7 +107,7 @@
                     DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
                     foreach (CalendarDisplayModel remain in Model.remainingWeeks)
                     {
-                        if (remain.isVisible == true && currentDate.Month == remain.Date.Month)
+                        if (remain.isVisible == true && currentDate.Month == remain.Date.Month && currentDate.Year == remain.Date.Year)
                         {
                             <div class="day-container">@remain.Date.Day</div>
                         }
@@ -128,11 +128,11 @@
                     DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
                     foreach (CalendarDisplayModel first in Model.firstWeek)
                     {
-                        if (first.isVisible == true && currentDate.Month == first.Date.Month)
+                        if ( first.isVisible == true && currentDate.Month == first.Date.Month && currentDate.Year == first.Date.Year )
                         {
                             <div class="day-container">@first.Date.Day</div>
                         }
-                        else if (first.isVisible == true && currentDate.Month != first.Date.Month){
+                        else if (first.isVisible == true){
                             <div class="day-container non-current-month">@first.Date.Day</div>
                         }
                         else

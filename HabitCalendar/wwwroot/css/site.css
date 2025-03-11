@@ -33,12 +33,6 @@
 }*/
 
 /* ~~~~~~~~~~~~~~~~~~~ Standard Blocks Section ~~~~~~~~~~~~~~~~~~~ */
-.button{
-
-}
-
-
-
 .nav{
     display: flex;
     justify-content: center;
@@ -232,22 +226,26 @@
 }
 
 /* ~~~~~~~~~~~~~~~~~~~ Create/Edit/Delete Habit Sections ~~~~~~~~~~~~~~~~~~~ */
-.form-container{
+.form-container {
     display: grid;
     justify-content: center;
 }
 .crud-form {
     border: 1px solid black;
     padding: 10px;
-/*    width: calc(var(--large-screen-day-width)*7 + (10px * 6));*/
+    /*    width: calc(var(--large-screen-day-width)*7 + (10px * 6));*/
     width: 400px;
+}
+.crud-form__title{
+    margin-bottom: 16px;
 }
 .crud-form__field {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     align-items:center;
-    height: 50px;
+    padding-bottom: 16px;
 }
+
 .crud-form__label{
     display: flex;
     align-items: center;
@@ -256,8 +254,11 @@
     height: 30px;
     padding-left: 2px;
 }
-.crud-form__submit-back-buttons{
-    width:100%;
+.crud-form__validation{
+    grid-column: span 2;
+}
+.crud-form__submit-back-buttons {
+    width: 100%;
     padding-top: 8px;
     display: flex;
     justify-content: space-between;

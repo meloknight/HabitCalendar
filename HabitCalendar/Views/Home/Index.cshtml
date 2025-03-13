@@ -88,11 +88,29 @@
                             <div class="day-container current-day">@curr.Date.Day</div>
                         }   
                         else if (curr.isVisible == true && currentDate.Month == curr.Date.Month) {
-                            <div class="day-container">@curr.Date.Day</div>
+                            <div class="day-container">
+                                <div class="day-container__inner-container">
+                                    <div class="day-container__top-container">
+                                        <div>@curr.Date.Day</div>
+                                        <div class="day-container__top-right">170.4</div>
+                                    </div>
+                                    <div class="day-container__middle-container">
+                                        <div class="day-container__big-x">X</div>
+                                        <div>O</div>
+                                        <div>*</div>
+                                    </div>
+                                    <div class="day-container__bottom-container">
+                                        04:22:05
+                                    </div>
+                                </div>
+                            </div>
                         }
                         else if (curr.isVisible == true && currentDate.Month != curr.Date.Month)
                         {
-                            <div class="day-container non-current-month">@curr.Date.Day</div>
+                            <div class="day-container non-current-month">
+
+                                @curr.Date.Day
+                            </div>
                         }
                         else {
                             <div class="day-container day-not-visible"></div>

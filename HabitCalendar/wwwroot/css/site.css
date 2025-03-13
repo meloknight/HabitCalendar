@@ -131,7 +131,7 @@ html, body {
     width: var(--large-screen-day-width);
     height: var(--large-screen-day-width);
     transition: var(--default-transition);
-    padding:2px;
+    padding:0 2px 0 2px;
 }
 .day-container:hover {
     background-color: #f7f7f7;
@@ -150,18 +150,24 @@ html, body {
 .day-container__top-container {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    border-bottom: 1px dashed black;
 /*    height: 18px;*/
 }
 .day-container__top-right{
     flex: 1;
     text-align: right;
 }
+.day-container__day {
+    border-right: 1px dashed black;
+    width: 20px;
+    padding-right:3px;
+    text-align: right;
+}
 .day-container__middle-container {
 /*    flex:1;*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    border-bottom: 1px solid black;
+    border-bottom: 1px dashed black;
 /*    height: 55px;*/
 /*    overflow: hidden;*/
 }
@@ -177,17 +183,18 @@ html, body {
 }
 .day-container__circle,
 .day-container__star {
-    font-size: 26px;
-    
+    font-size: 22px;
 }
-
+.day-container__circle{
+    border-bottom: 1px dashed black;
+}
 .day-container__big-x {
     grid-row: span 2;
     grid-column: span 2;
-    font-size: 80px;
-    height: 55px;
+    font-size: 70px;
+    height: 60px;
     overflow: hidden;
-/*    margin-top: -10px;*/
+    border-right: 1px dashed black;
 }
 .day-container__bottom-container {
 /*    height: 18px;*/

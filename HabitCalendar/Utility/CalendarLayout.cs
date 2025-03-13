@@ -177,7 +177,8 @@ namespace HabitCalendar.Utility
                 tempDateIncrementer = tempDateIncrementer.AddDays( 1 );
                 CalendarDisplayModel tempDate = CreateInvisibleDateForCalendar( tempDateIncrementer );
                 firstWeek.Add( tempDate );
-            };
+            }
+            ;
 
             return firstWeek;
         }
@@ -240,7 +241,10 @@ namespace HabitCalendar.Utility
         }
         private void updateFirstWeekIfCurrentWeekEqualToFirstWeek( List<CalendarDisplayModel> firstWeek, bool isCurrentWeekEqualToFirstWeek )
         {
-            if ( isCurrentWeekEqualToFirstWeek == true ) { firstWeek = new List<CalendarDisplayModel>(); }
+            if ( isCurrentWeekEqualToFirstWeek == true )
+            {
+                firstWeek.Clear();
+            }
         }
         private CalendarDisplayModel CreateInvisibleDateForCalendar( DateOnly tempDateIncrementer )
         {

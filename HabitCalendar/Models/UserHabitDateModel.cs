@@ -6,5 +6,6 @@
         public string? HabitName { get; set; }
         public string? HabitDisplayMethod { get; set; }
         public List<DateOnly> DateHabitCompleted { get; set; } = null!;
+
     }
 }

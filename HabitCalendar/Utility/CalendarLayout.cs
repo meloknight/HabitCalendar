@@ -101,6 +101,7 @@ namespace HabitCalendar.Utility
                     habitDisplay.HabitName = habit.HabitName;
                     habitDisplay.HabitDisplayMethod = habit.HabitDisplayMethod;
                     habitDisplay.isHabitCompleted = false;
+                    habitDisplay.HabitDayValue = "";
 
                     foreach ( DateOnly dateHabitCompleted in habit.DateHabitCompleted )
                     {

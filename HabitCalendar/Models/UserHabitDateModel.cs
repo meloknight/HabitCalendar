@@ -5,7 +5,7 @@
         public int HabitId { get; set; }
         public string? HabitName { get; set; }
         public string? HabitDisplayMethod { get; set; }
-        public List<DateOnly> DateHabitCompleted { get; set; } = null!;
+        public List<DateAndHabitCompletionDetailsModel> DateHabitCompletedAndDetails { get; set; } = null!;
 
     }
 }

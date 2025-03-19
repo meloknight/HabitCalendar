@@ -64,7 +64,12 @@ namespace HabitCalendar.Utility
                     HabitId = h.HabitId,
                     HabitName = h.HabitName,
                     HabitDisplayMethod = h.HabitDisplayMethod,
-                    DateHabitCompleted = h.HabitsDaysCompleted.Select( c => c.DateHabitCompleted ).ToList()
+                    DateHabitCompletedAndDetails = h.HabitsDaysCompleted.Select( c => new DateAndHabitCompletionDetailsModel
+                    {
+                        DateHabitCompleted = c.DateHabitCompleted,
+                        HabitDayValue = c.HabitDayValue,
+                        Notes = c.Notes
+                    } ).ToList()
                 } )
                 .ToList();
             return userHabitDates;
@@ -102,12 +107,15 @@ namespace HabitCalendar.Utility
                     habitDisplay.HabitDisplayMethod = habit.HabitDisplayMethod;
                     habitDisplay.isHabitCompleted = false;
                     habitDisplay.HabitDayValue = "";
+                    habitDisplay.Notes = "";
 
-                    foreach ( DateOnly dateHabitCompleted in habit.DateHabitCompleted )
+                    foreach ( DateAndHabitCompletionDetailsModel dateHabitCompletedAndDetails in habit.DateHabitCompletedAndDetails )
                     {
-                        if ( dateHabitCompleted == date )
+                        if ( dateHabitCompletedAndDetails.DateHabitCompleted == date )
                         {
                             habitDisplay.isHabitCompleted = true;
+                            habitDisplay.HabitDayValue = dateHabitCompletedAndDetails.HabitDayValue;
+                            habitDisplay.Notes = dateHabitCompletedAndDetails.Notes;
                         }
                     }
 

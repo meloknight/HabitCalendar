@@ -97,7 +97,7 @@
                         {
                             <div class="day-container non-current-month">
 
-                                @curr.Date.Day
+                                <partial name="_CalendarDay" model="curr" />
                             </div>
                         }
                         else {
@@ -115,10 +115,13 @@
                     {
                         if (remain.isVisible == true && currentDate.Month == remain.Date.Month && currentDate.Year == remain.Date.Year)
                         {
-                            <div class="day-container">@remain.Date.Day</div>
+
+                            <div class="day-container"><partial name="_CalendarDay" model="remain" /></div>
                         }
                         else if (remain.isVisible == true){
-                            <div class="day-container non-current-month">@remain.Date.Day</div>
+                            <div class="day-container non-current-month">
+                                <partial name="_CalendarDay" model="remain" />
+                            </div>
                         }
                         else
                         {
@@ -136,10 +139,14 @@
                     {
                         if ( first.isVisible == true && currentDate.Month == first.Date.Month && currentDate.Year == first.Date.Year )
                         {
-                            <div class="day-container">@first.Date.Day</div>
+                            <div class="day-container">
+                                <partial name="_CalendarDay" model="first" />
+                            </div>
                         }
                         else if (first.isVisible == true){
-                            <div class="day-container non-current-month">@first.Date.Day</div>
+                            <div class="day-container non-current-month">
+                                <partial name="_CalendarDay" model="first" />
+                            </div>
                         }
                         else
                         {

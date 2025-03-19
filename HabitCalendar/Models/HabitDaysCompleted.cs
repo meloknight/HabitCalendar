@@ -14,7 +14,7 @@ namespace HabitCalendar.Models
         [MaxLength( 400 )]
         public string HabitDayValue { get; set; } = string.Empty;
         [MaxLength( 400 )]
-        public string? Notes { get; set; }
+        public string Notes { get; set; } = string.Empty;
         [Required]
         [ForeignKey( "Habit" )]
         public int HabitId { get; set; }

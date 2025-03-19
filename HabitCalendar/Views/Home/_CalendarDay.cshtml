@@ -1,29 +1,67 @@
 ﻿@using HabitCalendar.Models
 @model CalendarDisplayModel;
 
-
 @{
-    
+    bool isBigX = false;
+    bool isCircle = false;
+    bool isStar = false;
+    string longTextValue = "";
+    string shortTextValue = "";
 
+    foreach(HabitDisplayModel habit in Model.habitsCompleted)
+    {
+        if(habit.HabitDisplayMethod == "Big X")
+        {
+            isBigX = habit.isHabitCompleted;
+        }
+        if ( habit.HabitDisplayMethod == "Circle" )
+        {
+            isCircle = habit.isHabitCompleted;
+        }
+        if ( habit.HabitDisplayMethod == "Star" )
+        {
+            isStar = habit.isHabitCompleted;
+        }
+        if ( habit.HabitDisplayMethod == "Long Text" )
+        {
+            longTextValue = habit.HabitDayValue;
+        }
+        if ( habit.HabitDisplayMethod == "Short Text" )
+        {
+            shortTextValue = habit.HabitDayValue;
+        }
+    }
 
-
-
-
+    <div class="day-container__inner-container">
+        <div class="day-container__top-container">
+            <div class="day-container__day">@Model.Date.Day</div>
+            <div class="day-container__top-right">@shortTextValue</div>
+        </div>
+        <div class="day-container__middle-container">
+            <div class="day-container__big-x">
+                @if(isBigX == true)
+                {
+                    <i class="fa-solid fa-xmark"></i>
+                }
+            </div>
+            <div class="day-container__circle">
+                @if ( isBigX == true )
+                {
+                    <i class="fa-solid fa-o"></i>
+                }
+            </div>
+            <div class="day-container__star">
+                @if ( isBigX == true )
+                {
+                    <i class="fa-regular fa-star"></i>
+                }
+            </div>
+        </div>
+        <div class="day-container__bottom-container">
+            @longTextValue
+        </div>
+    </div>
 }
-<div class="day-container__inner-container">
-    <div class="day-container__top-container">
-        <div class="day-container__day">@Model.Date.Day</div>
-        <div class="day-container__top-right">170.4</div>
-    </div>
-    <div class="day-container__middle-container">
-        <div class="day-container__big-x"><i class="fa-solid fa-xmark"></i></div>
-        <div class="day-container__circle"><i class="fa-solid fa-o"></i></div>
-        <div class="day-container__star"><i class="fa-regular fa-star"></i></div>
-    </div>
-    <div class="day-container__bottom-container">
-        04:22:05
-    </div>
-</div>
 
 
 

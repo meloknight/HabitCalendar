@@ -9,7 +9,7 @@
     --large-screen-day-width: 100px;
     --color-dark: black;
     --color-medium: grey;
-    --color-light: #888888;
+    --color-light: #cccccc;
     --color-white: white;
     --color-nice: #F0CB53;
     --color-edit: #0094ff;
@@ -150,26 +150,27 @@ html, body {
 .day-container__top-container {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px dashed black;
-/*    height: 18px;*/
+    border-bottom: 1px dashed var(--color-light);
+    /*    height: 18px;*/
 }
 .day-container__top-right{
     flex: 1;
     text-align: right;
+    color: var(--color-dark);
 }
 .day-container__day {
-    border-right: 1px dashed black;
+    border-right: 1px dashed var(--color-light);
     width: 20px;
-    padding-right:3px;
+    padding-right: 3px;
     text-align: right;
 }
 .day-container__middle-container {
-/*    flex:1;*/
+    /*    flex:1;*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    border-bottom: 1px dashed black;
-/*    height: 55px;*/
-/*    overflow: hidden;*/
+    border-bottom: 1px dashed var(--color-light);
+    /*    height: 55px;*/
+    /*    overflow: hidden;*/
 }
 .day-container__middle-container div {
     display: flex;
@@ -184,9 +185,10 @@ html, body {
 .day-container__circle,
 .day-container__star {
     font-size: 22px;
+    color: var(--color-dark);
 }
-.day-container__circle{
-    border-bottom: 1px dashed black;
+.day-container__circle {
+    border-bottom: 1px dashed var(--color-light);
 }
 .day-container__big-x {
     grid-row: span 2;
@@ -194,10 +196,12 @@ html, body {
     font-size: 70px;
     height: 60px;
     overflow: hidden;
-    border-right: 1px dashed black;
+    border-right: 1px dashed var(--color-light);
+    color: var(--color-dark);
 }
 .day-container__bottom-container {
-/*    height: 18px;*/
+    min-height: 16px;
+    color: var(--color-dark);
 }
 
 

@@ -5,11 +5,14 @@
     bool isBigX = false;
     bool isCircle = false;
     bool isStar = false;
+    bool isLongText = true;
+    bool isShortText = true;
     string longTextValue = "";
     string shortTextValue = "";
 
     foreach(HabitDisplayModel habit in Model.habitsCompleted)
     {
+
         if(habit.HabitDisplayMethod == "Big X")
         {
             isBigX = habit.isHabitCompleted;
@@ -24,10 +27,12 @@
         }
         if ( habit.HabitDisplayMethod == "Long Text" )
         {
+            isLongText = habit.isHabitCompleted;
             longTextValue = habit.HabitDayValue;
         }
         if ( habit.HabitDisplayMethod == "Short Text" )
         {
+            isShortText = habit.isHabitCompleted;
             shortTextValue = habit.HabitDayValue;
         }
     }
@@ -35,7 +40,12 @@
     <div class="day-container__inner-container">
         <div class="day-container__top-container">
             <div class="day-container__day">@Model.Date.Day</div>
-            <div class="day-container__top-right">@shortTextValue</div>
+            <div class="day-container__top-right">
+                @if ( isShortText == true )
+                {
+                    <div>@shortTextValue</div>
+                }
+            </div>
         </div>
         <div class="day-container__middle-container">
             <div class="day-container__big-x">
@@ -45,20 +55,23 @@
                 }
             </div>
             <div class="day-container__circle">
-                @if ( isBigX == true )
+                @if ( isCircle == true )
                 {
                     <i class="fa-solid fa-o"></i>
                 }
             </div>
             <div class="day-container__star">
-                @if ( isBigX == true )
+                @if ( isStar == true )
                 {
                     <i class="fa-regular fa-star"></i>
                 }
             </div>
         </div>
         <div class="day-container__bottom-container">
-            @longTextValue
+            
+            @if (isLongText == true) {
+                <div>@longTextValue</div>
+            }
         </div>
     </div>
 }

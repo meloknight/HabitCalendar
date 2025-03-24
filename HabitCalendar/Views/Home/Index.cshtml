@@ -84,9 +84,9 @@
                     DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
                     foreach(CalendarDisplayModel curr in Model.currentWeek){
                         if(curr.isVisible == true && curr.Date == currentDate){
-                            <div class="day-container current-day">
+                            <a class="day-container current-day" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@curr.Date">
                                 <partial name="_CalendarDay" model="curr" />
-                            </div>
+                            </a>
                         }   
                         else if (curr.isVisible == true && currentDate.Month == curr.Date.Month) {
                             <div class="day-container">

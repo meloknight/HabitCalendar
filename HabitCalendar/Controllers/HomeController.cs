@@ -28,12 +28,6 @@ namespace HabitCalendar.Controllers
         {
             string? userId = _userManager.GetUserId( User );
 
-            //if ( userId != null )
-            //{
-            //    CalendarLayout CL = new CalendarLayout( _db, userId );
-            //}
-
-            //List<HabitCompletionViewModel> userHabitsWithDatesCompleted = new List<HabitCompletionViewModel>();
             CalendarInfoModel calendarInfo = new CalendarInfoModel();
 
             if ( userId != null )
@@ -42,21 +36,6 @@ namespace HabitCalendar.Controllers
                 calendarInfo.currentWeek = cl.currentWeek;
                 calendarInfo.firstWeek = cl.firstWeek;
                 calendarInfo.remainingWeeks = cl.remainingWeeks;
-                //var userStartDateList = _db.ApplicationUsers
-                //    .Where( u => u.Id == userId )
-                //    .Select( u => u.UserStartDate )
-                //    .First();
-                //DateOnly userStartDate = userStartDateList;
-
-                //userHabitsWithDatesCompleted = _db.Habits
-                //    .Where( h => h.ApplicationUserId == userId )
-                //    .Select( h => new HabitCompletionViewModel
-                //    {
-                //        UserStartDate = cl._userStartDate,
-                //        HabitName = h.HabitName,
-                //        DateHabitCompleted = h.HabitsDaysCompleted.Select( c => c.DateHabitCompleted ).ToList()
-                //    } )
-                //    .ToList();
 
                 return View( calendarInfo );
             }
@@ -77,6 +56,21 @@ namespace HabitCalendar.Controllers
 
             return View( habits );
         }
+
+
+
+
+        public IActionResult CalendarDayModify( DateOnly date )
+        {
+            string? userId = _userManager.GetUserId( User );
+
+
+
+            return View( date );
+        }
+
+
+
 
         [ResponseCache( Duration = 0, Location = ResponseCacheLocation.None, NoStore = true )]
         public IActionResult Error()

@@ -142,21 +142,17 @@ html, body {
     flex-direction: column;
     height: 100%;
     justify-content: space-between
-/*    grid-template-rows: 1fr 2.5fr 1fr;*/
-}
-.day-container__inner-container div{
-/*    border: 1px solid black;*/
 }
 .day-container__top-container {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px dashed var(--color-light);
-    /*    height: 18px;*/
 }
-.day-container__top-right{
+.day-container__top-right {
     flex: 1;
     text-align: right;
     color: var(--color-dark);
+    overflow: hidden;
 }
 .day-container__day {
     border-right: 1px dashed var(--color-light);
@@ -165,22 +161,15 @@ html, body {
     text-align: right;
 }
 .day-container__middle-container {
-    /*    flex:1;*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     border-bottom: 1px dashed var(--color-light);
-    /*    height: 55px;*/
-    /*    overflow: hidden;*/
 }
 .day-container__middle-container div {
     display: flex;
     align-items: center;
     justify-content: center;
-/*    border: 1px solid black;*/
     padding: 0;
-}
-.day-container__middle-container div i{
-/*    border: 1px solid black;*/
 }
 .day-container__circle,
 .day-container__star {
@@ -202,6 +191,7 @@ html, body {
 .day-container__bottom-container {
     min-height: 16px;
     color: var(--color-dark);
+    overflow: hidden;
 }
 
 

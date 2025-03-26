@@ -358,6 +358,26 @@ html, body {
     align-items: center;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~ Calendar Day Modify Section ~~~~~~~~~~~~~~~~~~~ */
+
+.form-container--single-day{
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.form-container--single-day__header-container{
+    border: 1px solid black;
+    width: 720px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+
+
+
+
 
 
 

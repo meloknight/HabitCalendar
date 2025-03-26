@@ -89,16 +89,16 @@
                             </a>
                         }   
                         else if (curr.isVisible == true && currentDate.Month == curr.Date.Month) {
-                            <div class="day-container">
+                            <a class="day-container" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@curr.Date">
                                 <partial name="_CalendarDay" model="curr" />
-                            </div>
+                            </a>
                         }
                         else if (curr.isVisible == true && currentDate.Month != curr.Date.Month)
                         {
-                            <div class="day-container non-current-month">
+                            <a class="day-container non-current-month" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@curr.Date">
 
                                 <partial name="_CalendarDay" model="curr" />
-                            </div>
+                            </a>
                         }
                         else {
                             <div class="day-container day-not-visible"></div>

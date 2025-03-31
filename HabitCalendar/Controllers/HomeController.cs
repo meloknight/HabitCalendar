@@ -80,10 +80,35 @@ namespace HabitCalendar.Controllers
                 .Where( h => h.DateHabitCompleted == date )
                 .ToList();
 
+            List<HabitDisplayModel> chosenDaysHabitsForDisplay = new();
+            foreach ( Habit habit in userHabits )
+            {
+                // build out the habitDisplay, then add it to chosenDaysHabitsForDisplay
+                HabitDisplayModel habitDisplay = new();
+                habitDisplay.HabitId = habit.HabitId;
+                habitDisplay.HabitName = habit.HabitName;
+                habitDisplay.HabitDisplayMethod = habit.HabitDisplayMethod;
+                habitDisplay.isHabitCompleted = false;
+                habitDisplay.HabitDayValue = "";
+                habitDisplay.Notes = "";
 
-            return View( date );
+                if ( chosenHabitDayCompleted.Count > 0 )
+                {
+                    foreach ( HabitDaysCompleted habitCompleted in chosenHabitDayCompleted )
+                    {
+                        if ( habitCompleted.HabitId == habit.HabitId )
+                        {
+                            habitDisplay.isHabitCompleted = true;
+                            habitDisplay.HabitDayValue = habitCompleted.HabitDayValue;
+                            habitDisplay.Notes = habitCompleted.Notes;
+                        }
+                    }
+
+                }
+                chosenDaysHabitsForDisplay.Add( habitDisplay );
+            }
+            return View( chosenDaysHabitsForDisplay );
         }
-
 
 
 

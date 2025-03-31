@@ -362,18 +362,38 @@ html, body {
 
 .form-container--single-day{
     width: 100%;
-    border: 1px solid black;
+/*    border: 1px solid black;*/
     display: flex;
     justify-content: center;
 }
-
 .form-container--single-day__header-container{
-    border: 1px solid black;
     width: 760px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap:10px;
+    grid-template-columns: 1fr 1fr 2fr 2fr 1fr;
+}
+.form-container--single-day__header-cell {
+    border: 1px solid white;
+}
+.form-container--single-day__body-container {
+    margin-top: 10px;
+    width: 760px;
+
+}
+.form-container--single-day__body-row {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 2fr 2fr 1fr;
+    margin-bottom: 10px;
 }
 
+.form-container--single-day__body-cell {
+    border: 1px solid black;
+    padding: 8px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+}
 
 
 

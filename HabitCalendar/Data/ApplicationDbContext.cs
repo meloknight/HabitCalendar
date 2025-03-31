@@ -14,6 +14,7 @@ namespace HabitCalendar.Data
         }
 
         public DbSet<Habit> Habits { get; set; } = null!;
+        public DbSet<HabitDaysCompleted> HabitDaysCompleted { get; set; } = null!;
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
 
         protected override void OnModelCreating( ModelBuilder modelBuilder )

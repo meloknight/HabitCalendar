@@ -369,7 +369,7 @@ html, body {
 
 .form-container--single-day__header-container{
     border: 1px solid black;
-    width: 720px;
+    width: 760px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }

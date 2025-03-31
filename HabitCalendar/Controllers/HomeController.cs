@@ -64,6 +64,21 @@ namespace HabitCalendar.Controllers
         {
             string? userId = _userManager.GetUserId( User );
 
+            List<Habit> userHabits = _db.Habits
+                .Where( h => h.ApplicationUserId == userId )
+            //.Select( row => row.HabitId )
+                .ToList();
+
+            List<int> habitIds = new List<int>();
+            foreach ( Habit habit in userHabits )
+            {
+                habitIds.Add( habit.HabitId );
+            }
+
+            // Fill up a set of HabitDisplayModels
+            var chosenHabitDayCompleted = _db.HabitDaysCompleted
+                .Where( h => h.DateHabitCompleted == date )
+                .ToList();
 
 
             return View( date );

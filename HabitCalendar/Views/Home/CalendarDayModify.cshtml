@@ -21,15 +21,55 @@
         <div class="form-container--single-day__body-container">
 
 
-            @{
+@*             @{
                 foreach(HabitDisplayModel habit in Model)
                 {
                     <div class ="form-container--single-day__body-row">
                         <div class="form-container--single-day__body-cell">@habit.HabitName</div>
                         <div class="form-container--single-day__body-cell">@habit.HabitDisplayMethod</div>
-                        <div class="form-container--single-day__body-cell">@habit.HabitDayValue</div>
+
+
+
+
+                        <div class="form-container--single-day__body-cell">
+                            
+                            <input asp-for="@habit.HabitDayValue">
+                            <span class="crud-form__validation" asp-validation-for="@habit.HabitDayValue"></span>
+                            
+                        </div>
+
                         <div class="form-container--single-day__body-cell">@habit.Notes</div>
+
                         <div class="form-container--single-day__body-cell">@habit.isHabitCompleted</div>
+                    </div>
+                }
+
+            } *@
+
+            @{
+                for ( int i = 0; i < Model.Count; i++ )
+                {
+                    <div class="form-container--single-day__body-row">
+                        @Html.HiddenFor(m => m[i].HabitName)
+                        @Html.HiddenFor(m => m[i].HabitDisplayMethod)
+                        @Html.HiddenFor(m => m[i].HabitId)
+                        @Html.HiddenFor(m => m[i].Date)
+
+                        <div class="form-container--single-day__body-cell">@Model[i].HabitName</div>
+                        <div class="form-container--single-day__body-cell">@Model[i].HabitDisplayMethod</div>
+
+                        <div class="form-container--single-day__body-cell">
+                            @Html.TextBoxFor(m => m[i].HabitDayValue)
+                        </div>
+                        
+                        <div class="form-container--single-day__body-cell">
+                            @Html.TextBoxFor(m => m[i].Notes)
+                        </div>
+
+                        <div class="form-container--single-day__body-cell">
+                            @Html.TextBoxFor( m => m[i].isHabitCompleted)
+                        </div>
+
                     </div>
                 }
 
@@ -37,10 +77,11 @@
 
 
 
-
-
     </div>
-    
+        <div class="crud-form__submit-back-buttons">
+            <button class="crud-form__update-button" type="submit">Update</button>
+            <a class="crud-form__back-button" asp-controller="Home" asp-action="Index">Back to Habit List</a>
+        </div>
     
     
     </form>

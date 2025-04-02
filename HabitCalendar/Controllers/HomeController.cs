@@ -91,6 +91,7 @@ namespace HabitCalendar.Controllers
                 habitDisplay.isHabitCompleted = false;
                 habitDisplay.HabitDayValue = "";
                 habitDisplay.Notes = "";
+                habitDisplay.Date = date;
 
                 if ( chosenHabitDayCompleted.Count > 0 )
                 {
@@ -101,6 +102,7 @@ namespace HabitCalendar.Controllers
                             habitDisplay.isHabitCompleted = true;
                             habitDisplay.HabitDayValue = habitCompleted.HabitDayValue;
                             habitDisplay.Notes = habitCompleted.Notes;
+                            habitDisplay.HabitDaysCompletedId = habitCompleted.HabitDaysCompletedId;
                         }
                     }
 
@@ -110,7 +112,23 @@ namespace HabitCalendar.Controllers
             return View( chosenDaysHabitsForDisplay );
         }
 
+        [HttpPost]
+        public IActionResult CalendarDayModify( List<HabitDisplayModel> chosenDaysHabitsUpdated )
+        {
 
+            if ( ModelState.IsValid )
+            {
+                foreach ( HabitDisplayModel habit in chosenDaysHabitsUpdated )
+                {
+
+
+
+
+                }
+                return RedirectToAction( "Index", "Home" );
+            }
+            return View( chosenDaysHabitsUpdated );
+        }
 
         [ResponseCache( Duration = 0, Location = ResponseCacheLocation.None, NoStore = true )]
         public IActionResult Error()

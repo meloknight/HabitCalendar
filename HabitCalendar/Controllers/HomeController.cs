@@ -118,13 +118,49 @@ namespace HabitCalendar.Controllers
 
             if ( ModelState.IsValid )
             {
+                List<HabitDisplayModel> ExistingHabitDatesForUpdate = new();
+                List<HabitDisplayModel> NewHabitDatesToAddToDb = new();
                 foreach ( HabitDisplayModel habit in chosenDaysHabitsUpdated )
                 {
+                    if ( habit.HabitDaysCompletedId != null )
+                    {
+                        ExistingHabitDatesForUpdate.Add( habit );
+                    }
+                    else
+                    {
+                        NewHabitDatesToAddToDb.Add( habit );
+                    }
+                }
+
+                if ( ExistingHabitDatesForUpdate.Count > 0 )
+                {
+                    List<int?> habitDaysCompletedIdsForUpdate = new();
+                    foreach ( HabitDisplayModel id in ExistingHabitDatesForUpdate )
+                    {
+                        habitDaysCompletedIdsForUpdate.Add( id.HabitDaysCompletedId );
+                    }
+                    List<HabitDaysCompleted> habitDaysCompletedForUpdate = _db.HabitDaysCompleted
+                        .Where( h => habitDaysCompletedIdsForUpdate.Contains( h.HabitDaysCompletedId ) )
+                        .ToList();
+
+                    foreach ( HabitDaysCompleted habitDayForUpdate in habitDaysCompletedForUpdate )
+                    {
+                        int habitDayCompletedId = habitDayForUpdate.HabitDaysCompletedId;
+                        HabitDisplayModel? matchingExistingHabitDateForUpdate = ExistingHabitDatesForUpdate
+                            .Where( h => h.HabitDaysCompletedId.Equals( habitDayCompletedId ) )
+                            .FirstOrDefault();
+
+                        habitDayForUpdate.HabitDayValue = matchingExistingHabitDateForUpdate.HabitDayValue;
+                        habitDayForUpdate.Notes = matchingExistingHabitDateForUpdate.Notes;
 
 
+                    }
 
 
                 }
+
+
+
                 return RedirectToAction( "Index", "Home" );
             }
             return View( chosenDaysHabitsUpdated );

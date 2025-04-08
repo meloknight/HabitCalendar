@@ -118,6 +118,7 @@ namespace HabitCalendar.Controllers
 
             if ( ModelState.IsValid )
             {
+                // Seperate habits of day into Existing (update existing) and New (Create New Id)
                 List<HabitDisplayModel> ExistingHabitDatesForUpdate = new();
                 List<HabitDisplayModel> NewHabitDatesToAddToDb = new();
                 foreach ( HabitDisplayModel habit in chosenDaysHabitsUpdated )
@@ -139,6 +140,7 @@ namespace HabitCalendar.Controllers
                     {
                         habitDaysCompletedIdsForUpdate.Add( id.HabitDaysCompletedId );
                     }
+                    // Query the current version of the existing habit days. These will then be updated.
                     List<HabitDaysCompleted> habitDaysCompletedForUpdate = _db.HabitDaysCompleted
                         .Where( h => habitDaysCompletedIdsForUpdate.Contains( h.HabitDaysCompletedId ) )
                         .ToList();
@@ -150,16 +152,46 @@ namespace HabitCalendar.Controllers
                             .Where( h => h.HabitDaysCompletedId.Equals( habitDayCompletedId ) )
                             .FirstOrDefault();
 
-                        habitDayForUpdate.HabitDayValue = matchingExistingHabitDateForUpdate.HabitDayValue;
-                        habitDayForUpdate.Notes = matchingExistingHabitDateForUpdate.Notes;
+                        if ( matchingExistingHabitDateForUpdate.HabitDayValue == null )
+                        {
+                            habitDayForUpdate.HabitDayValue = "";
+                        }
+                        else { habitDayForUpdate.HabitDayValue = matchingExistingHabitDateForUpdate.HabitDayValue; }
 
+                        if ( matchingExistingHabitDateForUpdate.Notes == null )
+                        {
+                            habitDayForUpdate.Notes = "";
+                        }
+                        else { habitDayForUpdate.Notes = matchingExistingHabitDateForUpdate.Notes; }
 
                     }
-
-
+                    _db.HabitDaysCompleted.UpdateRange( habitDaysCompletedForUpdate );
+                    _db.SaveChanges();
                 }
-
-
+                // Create and add the newHabitDateCompleteds
+                List<HabitDaysCompleted> newHabitDatesForDb = new();
+                foreach ( HabitDisplayModel newHabitDate in NewHabitDatesToAddToDb )
+                {
+                    if ( newHabitDate.isHabitCompleted == true || newHabitDate.HabitDayValue != null || newHabitDate.Notes != null )
+                    {
+                        HabitDaysCompleted newHabitDayCompleted = new();
+                        newHabitDayCompleted.DateHabitCompleted = newHabitDate.Date;
+                        if ( newHabitDate.HabitDayValue != null )
+                        {
+                            newHabitDayCompleted.HabitDayValue = newHabitDate.HabitDayValue;
+                        }
+                        else { newHabitDayCompleted.HabitDayValue = ""; }
+                        if ( newHabitDate.Notes != null )
+                        {
+                            newHabitDayCompleted.Notes = newHabitDate.Notes;
+                        }
+                        else { newHabitDayCompleted.Notes = ""; }
+                        newHabitDayCompleted.HabitId = newHabitDate.HabitId;
+                        newHabitDatesForDb.Add( newHabitDayCompleted );
+                    }
+                }
+                _db.HabitDaysCompleted.AddRange( newHabitDatesForDb );
+                _db.SaveChanges();
 
                 return RedirectToAction( "Index", "Home" );
             }

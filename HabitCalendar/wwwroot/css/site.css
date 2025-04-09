@@ -132,6 +132,8 @@ html, body {
     height: var(--large-screen-day-width);
     transition: var(--default-transition);
     padding:0 2px 0 2px;
+    text-decoration: none;
+    color: var(--color-dark);
 }
 .day-container:hover {
     background-color: #f7f7f7;
@@ -163,6 +165,7 @@ html, body {
 .day-container__middle-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     border-bottom: 1px dashed var(--color-light);
 }
 .day-container__middle-container div {

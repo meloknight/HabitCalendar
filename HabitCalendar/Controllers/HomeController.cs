@@ -173,6 +173,7 @@ namespace HabitCalendar.Controllers
                     {
                         HabitDaysCompleted newHabitDayCompleted = new();
                         newHabitDayCompleted.DateHabitCompleted = newHabitDate.Date;
+                        newHabitDayCompleted.isHabitCompleted = newHabitDate.isHabitCompleted;
                         if ( newHabitDate.HabitDayValue != null )
                         {
                             newHabitDayCompleted.HabitDayValue = newHabitDate.HabitDayValue;

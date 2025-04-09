@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -15,6 +16,10 @@ namespace HabitCalendar.Models
         public string HabitDayValue { get; set; } = string.Empty;
         [MaxLength( 400 )]
         public string Notes { get; set; } = string.Empty;
+        [Required]
+        [DefaultValue( false )]
+        public bool isHabitCompleted { get; set; }
+
         [Required]
         [ForeignKey( "Habit" )]
         public int HabitId { get; set; }

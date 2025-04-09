@@ -57,9 +57,6 @@ namespace HabitCalendar.Controllers
             return View( habits );
         }
 
-
-
-
         public IActionResult CalendarDayModify( DateOnly date )
         {
             string? userId = _userManager.GetUserId( User );
@@ -99,7 +96,7 @@ namespace HabitCalendar.Controllers
                     {
                         if ( habitCompleted.HabitId == habit.HabitId )
                         {
-                            habitDisplay.isHabitCompleted = true;
+                            habitDisplay.isHabitCompleted = habitCompleted.isHabitCompleted;
                             habitDisplay.HabitDayValue = habitCompleted.HabitDayValue;
                             habitDisplay.Notes = habitCompleted.Notes;
                             habitDisplay.HabitDaysCompletedId = habitCompleted.HabitDaysCompletedId;
@@ -151,7 +148,7 @@ namespace HabitCalendar.Controllers
                         HabitDisplayModel? matchingExistingHabitDateForUpdate = ExistingHabitDatesForUpdate
                             .Where( h => h.HabitDaysCompletedId.Equals( habitDayCompletedId ) )
                             .FirstOrDefault();
-
+                        habitDayForUpdate.isHabitCompleted = matchingExistingHabitDateForUpdate.isHabitCompleted;
                         if ( matchingExistingHabitDateForUpdate.HabitDayValue == null )
                         {
                             habitDayForUpdate.HabitDayValue = "";

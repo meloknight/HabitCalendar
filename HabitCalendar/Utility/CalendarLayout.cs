@@ -68,7 +68,8 @@ namespace HabitCalendar.Utility
                     {
                         DateHabitCompleted = c.DateHabitCompleted,
                         HabitDayValue = c.HabitDayValue,
-                        Notes = c.Notes
+                        Notes = c.Notes,
+                        isHabitCompleted = c.isHabitCompleted,
                     } ).ToList()
                 } )
                 .ToList();
@@ -88,7 +89,9 @@ namespace HabitCalendar.Utility
             listOfAllDates.Reverse();
             return listOfAllDates;
         }
-        public List<CalendarDisplayModel> CreateListOfDatesWithDetails( List<DateOnly> allDates, List<UserHabitDateModel> userHabitDates )
+        public List<CalendarDisplayModel> CreateListOfDatesWithDetails(
+            List<DateOnly> allDates,
+            List<UserHabitDateModel> userHabitDates )
         {
             List<CalendarDisplayModel> allDatesWithDetails = new List<CalendarDisplayModel>();
 
@@ -113,7 +116,7 @@ namespace HabitCalendar.Utility
                     {
                         if ( dateHabitCompletedAndDetails.DateHabitCompleted == date )
                         {
-                            habitDisplay.isHabitCompleted = true;
+                            habitDisplay.isHabitCompleted = dateHabitCompletedAndDetails.isHabitCompleted;
                             habitDisplay.HabitDayValue = dateHabitCompletedAndDetails.HabitDayValue;
                             habitDisplay.Notes = dateHabitCompletedAndDetails.Notes;
                         }

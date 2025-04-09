@@ -6,11 +6,18 @@
 
 <div class="form-container--single-day">
     <form method="post" class="">
-        @* <input asp-for="HabitDaysCompletedId" hidden /> *@
 
-        <div>
-            Habit List on
-        </div>
+        @{
+            int selectedMonthNumber = Model[0].Date.Month;
+            string selectedMonthText = Model[0].monthNames[selectedMonthNumber - 1];
+            string selectedDayText = Model[0].Date.Day.ToString();
+            string selectedYearText = Model[0].Date.Year.ToString();
+
+            <div>
+                 - Habit List on @selectedMonthText @selectedDayText, @selectedYearText - 
+            </div>
+        }
+
         <div class="form-container--single-day__header-container">
             <div class="form-container--single-day__header-cell">Habit Name</div>
             <div class="form-container--single-day__header-cell">Habit Display</div>
@@ -19,7 +26,6 @@
             <div class="form-container--single-day__header-cell">Habit Completed</div>
         </div>
         <div class="form-container--single-day__body-container">
-
 
 @*             @{
                 foreach(HabitDisplayModel habit in Model)
@@ -68,7 +74,7 @@
                         </div>
 
                         <div class="form-container--single-day__body-cell">
-                            @Html.TextBoxFor( m => m[i].isHabitCompleted)
+                            @Html.CheckBoxFor( m => m[i].isHabitCompleted, new {@class="form-container--single-day__checkbox"} )
                         </div>
 
                     </div>

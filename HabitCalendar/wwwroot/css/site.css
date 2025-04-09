@@ -374,6 +374,7 @@ html, body {
     display: grid;
     gap:10px;
     grid-template-columns: 1fr 1fr 2fr 2fr 1fr;
+    margin-top: 20px;
 }
 .form-container--single-day__header-cell {
     border: 1px solid white;
@@ -396,6 +397,9 @@ html, body {
     min-height: 50px;
     display: flex;
     align-items: center;
+}
+.form-container--single-day__checkbox {
+    background-color: red;
 }
 
 

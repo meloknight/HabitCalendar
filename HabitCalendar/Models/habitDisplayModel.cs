@@ -1,4 +1,6 @@
-﻿namespace HabitCalendar.Models
+﻿using System.Collections.ObjectModel;
+
+namespace HabitCalendar.Models
 {
     public class HabitDisplayModel
     {
@@ -10,5 +12,11 @@
         public string? Notes { get; set; } = string.Empty;
         public DateOnly Date { get; set; }
         public int? HabitDaysCompletedId { get; set; }
+        public readonly ReadOnlyCollection<string> monthNames =
+            new ReadOnlyCollection<string>( new string[]
+            {
+                        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            } );
     }
 }

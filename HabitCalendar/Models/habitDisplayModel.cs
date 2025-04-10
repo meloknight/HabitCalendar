@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace HabitCalendar.Models
 {
@@ -8,7 +9,12 @@ namespace HabitCalendar.Models
         public string? HabitName { get; set; }
         public string? HabitDisplayMethod { get; set; }
         public bool isHabitCompleted { get; set; }
+
+        [MaxLength( 30, ErrorMessage = "Max length is 30 characters" )]
+        [RegularExpression( @"^[^\[\]\(\)\{\}]+$", ErrorMessage = "Special characters, such as brackets, are not allowed." )]
         public string? HabitDayValue { get; set; } = string.Empty;
+
+        [MaxLength( 60, ErrorMessage = "Max length is 60 characters" )]
         public string? Notes { get; set; } = string.Empty;
         public DateOnly Date { get; set; }
         public int? HabitDaysCompletedId { get; set; }

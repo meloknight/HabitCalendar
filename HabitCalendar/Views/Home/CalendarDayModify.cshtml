@@ -66,11 +66,12 @@
                         <div class="form-container--single-day__body-cell">@Model[i].HabitDisplayMethod</div>
 
                         <div class="form-container--single-day__body-cell">
-                            @Html.TextBoxFor(m => m[i].HabitDayValue)
+                            @Html.TextBoxFor( m => m[i].HabitDayValue, new { @class = "form-container--single-day__textbox"})
+                            @Html.ValidationMessageFor(m => m[i].HabitDayValue)
                         </div>
                         
                         <div class="form-container--single-day__body-cell">
-                            @Html.TextBoxFor(m => m[i].Notes)
+                            @Html.TextBoxFor( m => m[i].Notes, new { @class = "form-container--single-day__textbox" } )
                         </div>
 
                         <div class="form-container--single-day__body-cell">

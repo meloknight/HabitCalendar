@@ -8,7 +8,6 @@ function scrollToBottom() {
     document.documentElement.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: 'smooth'
-        
     });
 }
 scrollBtnBottom.addEventListener('click', () => scrollToBottom());
@@ -18,7 +17,6 @@ function scrollToTop() {
     document.documentElement.scrollTo({
         top: 0,
         behavior: 'smooth'
-
     });
 }
 scrollBtnTop.addEventListener('click', () => scrollToTop());

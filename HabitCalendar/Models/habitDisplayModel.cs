@@ -14,7 +14,8 @@ namespace HabitCalendar.Models
         [RegularExpression( @"^[^\[\]\(\)\{\}]+$", ErrorMessage = "Special characters, such as brackets, are not allowed." )]
         public string? HabitDayValue { get; set; } = string.Empty;
 
-        [MaxLength( 60, ErrorMessage = "Max length is 60 characters" )]
+        [MaxLength( 100, ErrorMessage = "Max length is 100 characters" )]
+        [RegularExpression( @"^[^\[\]\(\)\{\}]+$", ErrorMessage = "Special characters, such as brackets, are not allowed." )]
         public string? Notes { get; set; } = string.Empty;
         public DateOnly Date { get; set; }
         public int? HabitDaysCompletedId { get; set; }

@@ -72,6 +72,7 @@
                         
                         <div class="form-container--single-day__body-cell">
                             @Html.TextBoxFor( m => m[i].Notes, new { @class = "form-container--single-day__textbox" } )
+                            @Html.ValidationMessageFor( m => m[i].Notes )
                         </div>
 
                         <div class="form-container--single-day__body-cell">

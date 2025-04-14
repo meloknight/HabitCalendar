@@ -1,9 +1,5 @@
 ﻿@model List<HabitDisplayModel>
 
-
-
-@* Could pass the same model as for the index here and databag the selected date... *@
-
 <div class="form-container--single-day">
     <form method="post" class="">
 
@@ -57,7 +53,6 @@
                         <div class="form-container--single-day__body-cell">
                             @Html.CheckBoxFor( m => m[i].isHabitCompleted, new {@class="form-container--single-day__checkbox"} )
                         </div>
-
                     </div>
                 }
             }
@@ -73,16 +68,8 @@
             }
             <a class="crud-form__back-button" asp-controller="Home" asp-action="Index">Back to Habit List</a>
         </div>
-    
-    
     </form>
-
-
-
 </div>
-
-
-
 
 @* Rough draft code *@
 

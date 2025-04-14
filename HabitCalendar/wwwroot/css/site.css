@@ -96,7 +96,26 @@ html, body {
     flex-direction: column;
     align-items: center;
 }
-
+.calendar-section-header {
+    display: flex;
+}
+.days-of-week-left,.days-of-week-right{
+    width: var(--large-screen-day-width);
+    display: grid;
+    align-items: start;
+    justify-content: center;
+}
+#scroll-to-top-button, #scroll-to-bottom-button{
+    width: 80px;
+    border: 1px solid black;
+    background-color: var(--color-white);
+}
+    #scroll-to-top-button:hover, #scroll-to-bottom-button:hover {
+        background-color: var(--color-nice);
+    }
+    .scroll-button-not-visible{
+    display: none;
+}
 #days-of-week-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -198,7 +217,6 @@ html, body {
     overflow: hidden;
     
 }
-
 
 .side-container {
     border: none;

@@ -4,17 +4,22 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<button id="scroll-to-bottom-button">Scroll To Bottom</button>
 <section id="calendar-section">
-
-    <div id="days-of-week-container">
-        <div class="day-of-week">Sunday</div>
-        <div class="day-of-week">Monday</div>
-        <div class="day-of-week">Tuesday</div>
-        <div class="day-of-week">Wednesday</div>
-        <div class="day-of-week">Thursday</div>
-        <div class="day-of-week">Friday</div>
-        <div class="day-of-week">Saturday</div>
+    <div class="calendar-section-header">
+        <div class="days-of-week-left">
+            <button id ="scroll-to-bottom-button" class="scroll-button-not-visible">To Bottom</button>
+        </div>
+        <div id="days-of-week-container">
+            <div class="day-of-week">Sunday</div>
+            <div class="day-of-week">Monday</div>
+            <div class="day-of-week">Tuesday</div>
+            <div class="day-of-week">Wednesday</div>
+            <div class="day-of-week">Thursday</div>
+            <div class="day-of-week">Friday</div>
+            <div class="day-of-week">Saturday</div>
+        </div>
+        <div class="days-of-week-right">
+        </div>
     </div>
 
     <div id="greater-calendar-container">
@@ -171,5 +176,21 @@
             }
             </div>
         </div>
+        <div class="calendar-section-header">
+            <div class="days-of-week-left">
+            <button id="scroll-to-top-button" class="scroll-button-not-visible">To Top</button>
+            </div>
+            <div id="days-of-week-container">
+                <div class="day-of-week">Sunday</div>
+                <div class="day-of-week">Monday</div>
+                <div class="day-of-week">Tuesday</div>
+                <div class="day-of-week">Wednesday</div>
+                <div class="day-of-week">Thursday</div>
+                <div class="day-of-week">Friday</div>
+                <div class="day-of-week">Saturday</div>
+            </div>
+            <div class="days-of-week-right">
+                
+            </div>
+        </div>
     </section>
-<button id="scroll-to-top-button">Scroll To Top</button>

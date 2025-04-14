@@ -8,14 +8,18 @@
     <form method="post" class="">
 
         @{
-            int selectedMonthNumber = Model[0].Date.Month;
-            string selectedMonthText = Model[0].monthNames[selectedMonthNumber - 1];
-            string selectedDayText = Model[0].Date.Day.ToString();
-            string selectedYearText = Model[0].Date.Year.ToString();
+            if (Model.Count > 0)
+            {
+                int selectedMonthNumber = Model[0].Date.Month;
+                string selectedMonthText = Model[0].monthNames[selectedMonthNumber - 1];
+                string selectedDayText = Model[0].Date.Day.ToString();
+                string selectedYearText = Model[0].Date.Year.ToString();
 
-            <div>
-                 - Habit List on @selectedMonthText @selectedDayText, @selectedYearText - 
-            </div>
+                <div>
+                    - Habit List on @selectedMonthText @selectedDayText, @selectedYearText - 
+                </div>
+
+            }
         }
 
         <div class="form-container--single-day__header-container">
@@ -26,31 +30,6 @@
             <div class="form-container--single-day__header-cell">Habit Completed</div>
         </div>
         <div class="form-container--single-day__body-container">
-
-@*             @{
-                foreach(HabitDisplayModel habit in Model)
-                {
-                    <div class ="form-container--single-day__body-row">
-                        <div class="form-container--single-day__body-cell">@habit.HabitName</div>
-                        <div class="form-container--single-day__body-cell">@habit.HabitDisplayMethod</div>
-
-
-
-
-                        <div class="form-container--single-day__body-cell">
-                            
-                            <input asp-for="@habit.HabitDayValue">
-                            <span class="crud-form__validation" asp-validation-for="@habit.HabitDayValue"></span>
-                            
-                        </div>
-
-                        <div class="form-container--single-day__body-cell">@habit.Notes</div>
-
-                        <div class="form-container--single-day__body-cell">@habit.isHabitCompleted</div>
-                    </div>
-                }
-
-            } *@
 
             @{
                 for ( int i = 0; i < Model.Count; i++ )
@@ -69,7 +48,7 @@
                             @Html.TextBoxFor( m => m[i].HabitDayValue, new { @class = "form-container--single-day__textbox"})
                             @Html.ValidationMessageFor(m => m[i].HabitDayValue)
                         </div>
-                        
+
                         <div class="form-container--single-day__body-cell">
                             @Html.TextBoxFor( m => m[i].Notes, new { @class = "form-container--single-day__textbox" } )
                             @Html.ValidationMessageFor( m => m[i].Notes )
@@ -81,14 +60,17 @@
 
                     </div>
                 }
-
             }
 
-
-
-    </div>
+        </div>
         <div class="crud-form__submit-back-buttons">
-            <button class="crud-form__update-button" type="submit">Update</button>
+            @if (Model.Count > 0)
+            {
+                <button class="crud-form__update-button" type="submit">Update</button>
+            } else
+            {
+                <div></div>
+            }
             <a class="crud-form__back-button" asp-controller="Home" asp-action="Index">Back to Habit List</a>
         </div>
     
@@ -98,3 +80,33 @@
 
 
 </div>
+
+
+
+
+@* Rough draft code *@
+
+@*             @{
+                foreach(HabitDisplayModel habit in Model)
+                {
+                    <div class ="form-container--single-day__body-row">
+                        <div class="form-container--single-day__body-cell">@habit.HabitName</div>
+                        <div class="form-container--single-day__body-cell">@habit.HabitDisplayMethod</div>
+
+
+
+
+                        <div class="form-container--single-day__body-cell">
+
+                            <input asp-for="@habit.HabitDayValue">
+                            <span class="crud-form__validation" asp-validation-for="@habit.HabitDayValue"></span>
+
+                        </div>
+
+                        <div class="form-container--single-day__body-cell">@habit.Notes</div>
+
+                        <div class="form-container--single-day__body-cell">@habit.isHabitCompleted</div>
+                    </div>
+                }
+
+            } *@

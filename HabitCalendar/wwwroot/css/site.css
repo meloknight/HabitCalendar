@@ -8,8 +8,8 @@
 :root {
     --large-screen-day-width: 100px;
     --color-dark: black;
-    --color-medium-dark: #707070;
-    --color-medium-light: #d4d4d4;
+    --color-medium-dark: #474747;
+    --color-medium-light: #8a8a8a;
     --color-light: #cccccc;
     --color-white: white;
     --color-nice: #F0CB53;
@@ -148,7 +148,7 @@ html, body {
 
 /* DAY CONTAINER */
 .day-container {
-    border: 1px solid black;
+    border: 2px solid black;
     width: var(--large-screen-day-width);
     height: var(--large-screen-day-width);
     transition: var(--default-transition);
@@ -216,7 +216,6 @@ html, body {
     min-height: 16px;
     color: var(--color-dark);
     overflow: hidden;
-    
 }
 
 .side-container {
@@ -234,19 +233,19 @@ html, body {
     visibility: hidden;
 }
 .current-day {
-    border: 1px solid var(--color-nice);
+    border: 2px solid var(--color-nice);
 }
 .second-month {
-    border: 1px solid var(--color-medium-dark);
-    color: var(--color-medium-dark)
+    border: 1px solid var(--color-dark);
+    color: var(--color-dark);
 }
 .third-month {
     border: 1px solid var(--color-medium-light);
-    color: var(--color-medium-light)
+    color: var(--color-medium-light);
 }
 .non-current-month {
     border: 1px solid var(--color-light);
-    color: var(--color-light)
+    color: var(--color-light);
 }
 
 /* ~~~~~~~~~~~~~~~~~~~ HABIT LIST PAGE ~~~~~~~~~~~~~~~~~~~ */

@@ -123,6 +123,18 @@
                                 <partial name="_CalendarDay" model="remain" />
                             </a>
                         }
+                        else if ( remain.isVisible == true && currentDate.Month-1 == remain.Date.Month && currentDate.Year == remain.Date.Year)
+                        {
+                            <a class="day-container second-month" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@remain.Date">
+                                <partial name="_CalendarDay" model="remain" />
+                            </a>
+                        }
+                        else if ( remain.isVisible == true && currentDate.Month-2 == remain.Date.Month && currentDate.Year == remain.Date.Year)
+                        {
+                            <a class="day-container third-month" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@remain.Date">
+                                <partial name="_CalendarDay" model="remain" />
+                            </a>
+                        }
                         else if (remain.isVisible == true){
                             <a class="day-container non-current-month" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@remain.Date">
                                 <partial name="_CalendarDay" model="remain" />

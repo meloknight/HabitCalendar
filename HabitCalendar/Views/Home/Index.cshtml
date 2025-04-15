@@ -98,6 +98,12 @@
                                 <partial name="_CalendarDay" model="curr" />
                             </a>
                         }
+                        else if ( curr.isVisible == true && currentDate.Month-1 == curr.Date.Month )
+                        {
+                            <a class="day-container second-month" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@curr.Date">
+                                <partial name="_CalendarDay" model="curr" />
+                            </a>
+                        }
                         else if (curr.isVisible == true && currentDate.Month != curr.Date.Month)
                         {
                             <a class="day-container non-current-month" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@curr.Date">
@@ -157,6 +163,18 @@
                         if ( first.isVisible == true && currentDate.Month == first.Date.Month && currentDate.Year == first.Date.Year )
                         {
                             <a class="day-container" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@first.Date">
+                                <partial name="_CalendarDay" model="first" />
+                            </a>
+                        }
+                        else if ( first.isVisible == true && currentDate.Month-1 == first.Date.Month && currentDate.Year == first.Date.Year )
+                        {
+                            <a class="day-container second-month" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@first.Date">
+                                <partial name="_CalendarDay" model="first" />
+                            </a>
+                        }
+                        else if ( first.isVisible == true && currentDate.Month-2 == first.Date.Month && currentDate.Year == first.Date.Year )
+                        {
+                            <a class="day-container third-month" asp-controller="Home" asp-action="CalendarDayModify" asp-route-date="@first.Date">
                                 <partial name="_CalendarDay" model="first" />
                             </a>
                         }

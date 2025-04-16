@@ -17,12 +17,25 @@
     --color-delete: #ff9595;
     --color-success: #72c762;
 }
+:root {
+    --large-screen-day-width: 100px;
+    --color-dark: black;
+    --color-medium-dark: #474747;
+    --color-medium-light: #8a8a8a;
+    --color-light: #cccccc;
+    --color-white: white;
+    --color-nice: #F0CB53;
+    --color-edit: #0094ff;
+    --color-delete: #ff9595;
+    --color-success: #72c762;
+}
 
 html, body {
     height: 100%;
 }
 
 .body-container {
+    background-color: var(--color-white);
     min-height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -53,7 +66,7 @@ html, body {
 }
 
 .nav__internal-container > li > a {
-    color: black;
+    color: var(--color-dark);
     text-decoration: none;
     /*    border: 1px solid black;*/
     width: var(--large-screen-day-width);
@@ -70,7 +83,9 @@ html, body {
     display: flex;
     justify-content:center;
     align-items: end;
-/*    border: 1px solid black;*/
+}
+.footer-container{
+    color: var(--color-medium-light);
 }
 
 /* NAV IDENTITY SECTION */
@@ -92,7 +107,6 @@ html, body {
 
 /* ~~~~~~~~~~~~~~~~~~~ Calendar Section ~~~~~~~~~~~~~~~~~~~ */
 #calendar-section {
-/*    overflow-y: auto;*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,7 +122,7 @@ html, body {
 }
 #scroll-to-top-button, #scroll-to-bottom-button{
     width: 80px;
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
     background-color: var(--color-white);
 }
     #scroll-to-top-button:hover, #scroll-to-bottom-button:hover {
@@ -148,7 +162,7 @@ html, body {
 
 /* DAY CONTAINER */
 .day-container {
-    border: 2px solid black;
+    border: 2px solid var(--color-dark);
     width: var(--large-screen-day-width);
     height: var(--large-screen-day-width);
     transition: var(--default-transition);
@@ -157,7 +171,6 @@ html, body {
     color: var(--color-dark);
 }
 .day-container:hover {
-    background-color: #f7f7f7;
     background-color: var(--color-nice);
 }
 .day-container__inner-container {
@@ -170,6 +183,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px dashed var(--color-light);
+    min-height: 16px;
 }
 .day-container__top-right {
     flex: 1;
@@ -233,7 +247,7 @@ html, body {
     visibility: hidden;
 }
 .current-day {
-    border: 2px solid var(--color-nice);
+    border: 3px solid var(--color-nice);
 }
 .second-month {
     border: 1px solid var(--color-dark);
@@ -325,7 +339,7 @@ html, body {
     justify-content: center;
 }
 .crud-form {
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
     padding: 10px;
     /*    width: calc(var(--large-screen-day-width)*7 + (10px * 6));*/
     width: 400px;
@@ -360,7 +374,7 @@ html, body {
 .crud-form__create-button {
     background-color: var(--color-white);
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
 }
 .crud-form__create-button:hover {
     background-color: var(--color-nice);
@@ -368,7 +382,7 @@ html, body {
 .crud-form__update-button{
     background-color: var(--color-white);
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
 }
 .crud-form__update-button:hover{
     background-color:var(--color-edit);
@@ -376,14 +390,14 @@ html, body {
 .crud-form__delete-button {
     background-color: var(--color-white);
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
 }
 .crud-form__delete-button:hover{
     background-color:var(--color-delete);
 }
 .crud-form__back-button{
     text-decoration: none;
-    color: black;
+    color: var(--color-dark);
     display:flex;
     align-items: center;
 }
@@ -392,7 +406,6 @@ html, body {
 
 .form-container--single-day{
     width: 100%;
-/*    border: 1px solid black;*/
     display: flex;
     justify-content: center;
 }
@@ -404,7 +417,7 @@ html, body {
     margin-top: 20px;
 }
 .form-container--single-day__header-cell {
-    border: 1px solid white;
+    border: 1px solid var(--color-white);
 }
 .form-container--single-day__body-container {
     margin-top: 10px;
@@ -419,7 +432,7 @@ html, body {
 }
 
 .form-container--single-day__body-cell {
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
     padding: 8px;
     min-height: 50px;
     display: flex;
@@ -429,7 +442,7 @@ html, body {
 }
 .form-container--single-day__textbox{
     border: none;
-    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed var(--color-dark);
     width: 100%;
     height: 100%;
 }
@@ -448,14 +461,12 @@ html, body {
 
 /* ~~~~~~~~~~~~~~~~~~~ Log In Page ~~~~~~~~~~~~~~~~~~~ */
 .identity-form{
-/*    border: 1px solid black;*/
     display: flex;
     justify-content: center;
 }
 .identity-form__inner-container {
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
     width: 400px;
-/*    height: 300px;*/
     padding: 10px;
 }
 .identity-form__title {
@@ -485,20 +496,20 @@ html, body {
 .identity-form__button {
     background-color: var(--color-white);
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
 }
 .identity-form__button:hover {
-        background-color: var(--color-nice);
+    background-color: var(--color-nice);
 }
 .identity-form__bottom-options {
     margin-top: 16px;
 }
 .identity-form__bottom-options a {
-        text-decoration: none;
-        color: var(--color-dark);
+    text-decoration: none;
+    color: var(--color-medium-light);
 }
 .identity-form__bottom-options a:hover {
-            color: var(--color-nice);
+    color: var(--color-nice);
 }
 
 

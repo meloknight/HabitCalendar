@@ -494,6 +494,8 @@ html, body {
     align-items: center;
 }
 .identity-form__button {
+    color: var(--color-dark);
+    text-decoration: none;
     background-color: var(--color-white);
     padding: 5px;
     border: 1px solid var(--color-dark);
@@ -537,7 +539,16 @@ html, body {
     margin-bottom: 16px;
 }
 
-
+.identity-form__paragraph {
+    margin-bottom: 16px;
+}
+.identity-form__two-button-container {
+    display: flex;
+    justify-content: space-between;
+}
+.identity-form__delete-button:hover {
+    background-color: var(--color-delete);
+}
 
 
 

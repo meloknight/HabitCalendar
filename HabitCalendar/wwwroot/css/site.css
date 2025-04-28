@@ -436,9 +436,10 @@ html, body {
     padding: 8px;
     min-height: 50px;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     display: flex;
     flex-direction: column;
+    overflow-wrap: anywhere;
 }
 .form-container--single-day__textbox{
     border: none;

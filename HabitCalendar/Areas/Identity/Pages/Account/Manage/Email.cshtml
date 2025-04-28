@@ -11,30 +11,34 @@
     <div class="col-md-6">
         <form id="email-form" method="post">
             <div asp-validation-summary="All" class="text-danger" role="alert"></div>
-            @if (Model.IsEmailConfirmed)
+            
+            @if ( Model.IsEmailConfirmed )
             {
-                <div class="form-floating mb-3 input-group">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
+                <div class="form-floating mb-3 input-group identity-form__field-container">
+                    <label asp-for="Email" class="form-label identity-form__label"></label>
+                    <input asp-for="Email" class="form-control identity-form__input" placeholder="Please enter your email." disabled />
                         <div class="input-group-append">
-                            <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                            <span class="h-100 input-group-text text-success font-weight-bold">Email Verified!</span>
                         </div>
-                    <label asp-for="Email" class="form-label"></label>
                 </div>
             }
             else
             {
-                <div class="form-floating mb-3">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
-                    <label asp-for="Email" class="form-label"></label>
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                <div class="identity-form__field-container">
+                    <label asp-for="Email" class="form-label identity-form__label"></label>
+                    <input asp-for="Email" class="form-control identity-form__input" placeholder="Please enter your email." disabled />
+                </div>
+                <div class="identity-form__field-container">
+                    <div></div>
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="identity-form__button">Send verification email</button>
                 </div>
             }
-            <div class="form-floating mb-3">
-                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Please enter new email." />
-                <label asp-for="Input.NewEmail" class="form-label"></label>
+            <div class="identity-form__field-container">
+                <label asp-for="Input.NewEmail" class="form-label identity-form__label"></label>
+                <input asp-for="Input.NewEmail" class="form-control identity-form__input" autocomplete="email" aria-required="true" placeholder="Please enter new email." />
                 <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
             </div>
-            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
+            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="identity-form__button">Change email</button>
         </form>
     </div>
 </div>

@@ -1,7 +1,7 @@
 ﻿@model List<HabitDisplayModel>
 
 <div class="form-container--single-day">
-    <form method="post" class="">
+    <form method="post" id="form-container">
 
         @{
             if (Model.Count > 0)
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-container--single-day__body-cell form-container--single-day__checkbox-container">
-                            @Html.CheckBoxFor( m => m[i].isHabitCompleted, new {@class="form-container--single-day__checkbox"} )
+                            @Html.CheckBoxFor( m => m[i].isHabitCompleted, new { @class = "form-container--single-day__checkbox", @id = "form-container--single-day__checkbox" } )
                         </div>
                     </div>
                 }

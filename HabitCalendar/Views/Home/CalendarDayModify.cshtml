@@ -70,30 +70,3 @@
         </div>
     </form>
 </div>
-
-@* Rough draft code *@
-
-@*             @{
-                foreach(HabitDisplayModel habit in Model)
-                {
-                    <div class ="form-container--single-day__body-row">
-                        <div class="form-container--single-day__body-cell">@habit.HabitName</div>
-                        <div class="form-container--single-day__body-cell">@habit.HabitDisplayMethod</div>
-
-
-
-
-                        <div class="form-container--single-day__body-cell">
-
-                            <input asp-for="@habit.HabitDayValue">
-                            <span class="crud-form__validation" asp-validation-for="@habit.HabitDayValue"></span>
-
-                        </div>
-
-                        <div class="form-container--single-day__body-cell">@habit.Notes</div>
-
-                        <div class="form-container--single-day__body-cell">@habit.isHabitCompleted</div>
-                    </div>
-                }
-
-            } *@

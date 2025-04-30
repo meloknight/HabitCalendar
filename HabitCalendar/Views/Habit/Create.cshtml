@@ -20,10 +20,15 @@
                         foreach (string habitDisplayMethod in habitDisplayMethods)
                         {
                             bool isDisplayMethodAvailable = true;
-                            foreach (string curr in ViewBag.currentHabitDisplays)
+                            if (ViewBag.currentHabitDisplays != null)
                             {
-                                if (curr == habitDisplayMethod) { isDisplayMethodAvailable = false; }
+                                foreach (string curr in ViewBag.currentHabitDisplays)
+                                    {
+                                        if (curr == habitDisplayMethod) { isDisplayMethodAvailable = false; }
+                                    }
+                                
                             }
+
                             if (isDisplayMethodAvailable == true)
                             {
                                 <option value="@habitDisplayMethod">@habitDisplayMethod</option>

@@ -9,23 +9,17 @@ using System.Diagnostics;
 namespace HabitCalendar.Controllers
 {
     [Authorize]
-    public class HomeController:Controller
+    public class HomeController:BaseController
     {
-
-        private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _db;
-        private readonly UserManager<IdentityUser> _userManager;
-
-        public HomeController( ILogger<HomeController> logger, ApplicationDbContext db, UserManager<IdentityUser> userManager )
+        public HomeController( ApplicationDbContext db, UserManager<IdentityUser> userManager ) : base( db, userManager )
         {
-            _logger = logger;
-            _db = db;
-            _userManager = userManager;
         }
 
         //Action method
         public IActionResult Index()
         {
+
+
             string? userId = _userManager.GetUserId( User );
 
             CalendarInfoModel calendarInfo = new CalendarInfoModel();

@@ -13,6 +13,11 @@
             @* <hr /> *@
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="identity-form__field-container">
+                <label asp-for="Input.DisplayUserName" class="identity-form__label">Username</label>
+                <input asp-for="Input.DisplayUserName" class="identity-form__input" aria-required="true" placeholder="username" />
+                <span asp-validation-for="Input.DisplayUserName" class="text-danger"></span>
+            </div>
+            <div class="identity-form__field-container">
                 <label asp-for="Input.Email" class="identity-form__label">Email</label>
                 <input asp-for="Input.Email" class="identity-form__input" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>

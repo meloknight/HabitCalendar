@@ -6,16 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HabitCalendar.Controllers
 {
-    public class HabitController:Controller
+    public class HabitController:BaseController
     {
-        private readonly ApplicationDbContext _db;
-        private readonly UserManager<IdentityUser> _userManager;
-
-        public HabitController( ApplicationDbContext db, UserManager<IdentityUser> userManager )
+        public HabitController( ApplicationDbContext db, UserManager<IdentityUser> userManager ) : base( db, userManager )
         {
-            _db = db;
-            _userManager = userManager;
         }
+
         public IActionResult Index()
         {
             string? userId = _userManager.GetUserId( User );

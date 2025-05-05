@@ -16,32 +16,30 @@
 </head>
 <body>
     <div class="body-container">
-    @* <div class="random-object"></div> *@
-    <header>
-        @* <p> hello gamer@gmail.com</p> *@
-        <nav class="nav nav--main">
-            <ul class="nav__internal-container">
-                <li class="nav__list-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li class="nav__list-item"><a asp-controller="Habit" asp-action="Index">Habits</a></li>
-                <li class="nav__list-item"><a href="#"></a></li>
-                <li class="nav__list-item"><a href="#"></a></li>
-                <li class="nav__list-item"><a href="#"></a></li>
+        <header>
+            <nav class="nav nav--main">
+                <ul class="nav__internal-container">
+                    <li class="nav__list-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="nav__list-item"><a asp-controller="Habit" asp-action="Index">Habits</a></li>
+                    <li class="nav__list-item"><a href="#"></a></li>
+                    <li class="nav__list-item"><a href="#"></a></li>
+                    <li class="nav__list-item"><a href="#"></a></li>
 
-                @* The two nav Identity links *@
-                @if (SignInManager.IsSignedIn(User)){
-                    <li class="nav-identity-item nav__list-item">
-                        @{
-                            string userEmail = UserManager.GetUserName(User);
-                            string userName = "";
-                            int atIndex = userEmail.IndexOf('@');
-                            if (atIndex >= 0) {
-                                userName = userEmail.Substring(0, atIndex);
-                            } else {
-                                userName = userEmail;
-                            }
+                    @* The two nav Identity links *@
+                    @if (SignInManager.IsSignedIn(User)){
+                        <li class="nav-identity-item nav__list-item">
+                            
+@*                                 // string userEmail = UserManager.GetUserName(User);
+                            // string userName = "";
+                            // int atIndex = userEmail.IndexOf('@');
+                            // if (atIndex >= 0) {
+                            //     userName = userEmail.Substring(0, atIndex);
+                            // } else {
+                            //     userName = userEmail;
+                            // } *@
 
-                            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@userName</a>
-                        }
+                                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@ViewData["DisplayUserName"]</a>
+                            
                     </li>
                     <li class="nav-identity-item nav__list-item">
                         <form id="logoutForm" class="identity-form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

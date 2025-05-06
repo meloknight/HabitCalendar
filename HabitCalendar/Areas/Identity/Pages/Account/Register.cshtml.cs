@@ -92,7 +92,7 @@ namespace HabitCalendar.Areas.Identity.Pages.Account
             [Compare( "Password", ErrorMessage = "The password and confirmation password do not match." )]
             public string ConfirmPassword { get; set; }
 
-            // Addition for custom UI on Registration screen
+            // Addition for custom UI on Registration screen and storage of Display Username
             [Required]
             [Display( Name = "Username" )]
             public string DisplayUserName { get; set; }
@@ -114,8 +114,11 @@ namespace HabitCalendar.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.DisplayUserName = Input.DisplayUserName;
+
                 await _userStore.SetUserNameAsync( user, Input.Email, CancellationToken.None );
                 await _emailStore.SetEmailAsync( user, Input.Email, CancellationToken.None );
+
 
                 var result = await _userManager.CreateAsync( user, Input.Password );
 

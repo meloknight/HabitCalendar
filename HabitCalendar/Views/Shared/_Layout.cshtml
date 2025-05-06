@@ -28,17 +28,43 @@
                     @* The two nav Identity links *@
                     @if (SignInManager.IsSignedIn(User)){
                         <li class="nav-identity-item nav__list-item">
-                            
-@*                                 // string userEmail = UserManager.GetUserName(User);
-                            // string userName = "";
-                            // int atIndex = userEmail.IndexOf('@');
-                            // if (atIndex >= 0) {
-                            //     userName = userEmail.Substring(0, atIndex);
-                            // } else {
-                            //     userName = userEmail;
-                            // } *@
+                            @{
+                                if ( ViewData["DisplayUserName"] != null && ViewData["DisplayUserName"].ToString() != "")
+                                {
+                                    <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@ViewData["DisplayUserName"]</a>
+                                } else
+                                {
+                                    string userEmail = UserManager.GetUserName( User );
+                                    string userName = "";
+                                    int atIndex = userEmail.IndexOf( '@' );
+                                    if ( atIndex >= 0 )
+                                    {
+                                        userName = userEmail.Substring( 0, atIndex );
+                                    }
+                                    else
+                                    {
+                                        userName = userEmail;
+                                    }
+                                    <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@userEmail</a>
+                                }
 
-                                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@ViewData["DisplayUserName"]</a>
+
+                                // if ( @ViewData["DisplayUserName"].ToString() == "" || @ViewData["DisplayUserName"].ToString() == null )
+                                // {
+                                //     string userEmail = UserManager.GetUserName(User);
+                                //     string userName = "";
+                                //     int atIndex = userEmail.IndexOf('@');
+                                //     if (atIndex >= 0) {
+                                //         userName = userEmail.Substring(0, atIndex);
+                                //     } else {
+                                //         userName = userEmail;
+                                //     }
+                                //     <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@userName</a>
+                                // } else
+                                // {
+                                //     <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@ViewData["DisplayUserName"]</a>
+                                // }
+                            }
                             
                     </li>
                     <li class="nav-identity-item nav__list-item">

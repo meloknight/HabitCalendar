@@ -15,12 +15,17 @@
                 <label asp-for="Username" class="identity-form__label">Email</label>
                 <input asp-for="Username" class="identity-form__input" placeholder="Please choose your username." disabled />
             </div>
+            <div class="identity-form__field-container">
+                <label asp-for="Input.DisplayUserName" class="identity-form__label">Current Username</label>
+                <input asp-for="Input.DisplayUserName" class="identity-form__input" aria-required="true" placeholder="username" disabled/>
+                @* <span asp-validation-for="Input.DisplayUserName" class="text-danger"></span> *@
+            </div>
             @* <div class="form-floating mb-3">
                 <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div> *@
-            @* <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button> *@
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary ">Update</button>
         </form>
     </div>
 </div>

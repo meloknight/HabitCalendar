@@ -459,7 +459,7 @@ html, body {
     cursor: pointer;
 }
 
-/* ~~~~~~~~~~~~~~~~~~~ Log In Page ~~~~~~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~~~~ Identity Page(s) ~~~~~~~~~~~~~~~~~~~ */
 .identity-form{
     display: flex;
     justify-content: center;
@@ -550,7 +550,9 @@ html, body {
     background-color: var(--color-delete);
 }
 
-
+.password-change-container {
+    margin-top: 20px;
+}
 
 
 

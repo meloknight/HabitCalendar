@@ -466,7 +466,8 @@ html, body {
 }
 .identity-form__inner-container {
     border: 1px solid var(--color-dark);
-    width: 400px;
+    max-width: 400px;
+    width: 90vw;
     padding: 10px;
 }
 .identity-form__title {
@@ -537,6 +538,7 @@ html, body {
     gap: 10px;
     align-items: center;
     margin-bottom: 16px;
+    flex-wrap: wrap;
 }
 
 .identity-form__paragraph {
@@ -553,6 +555,30 @@ html, body {
 .change-container {
     margin-top: 20px;
 }
+
+/* ~~~~~~~~~~~~~~~~~~~ Info Section ~~~~~~~~~~~~~~~~~~~ */
+.info-section{
+    display: flex;
+    justify-content:center;
+/*    border:1px solid black;*/
+}
+
+.info-section__inner-container {
+    padding:10px;
+    border: 1px solid black;
+    max-width: calc(var(--large-screen-day-width)*7 + (10px * 6));
+    width: 90vw;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

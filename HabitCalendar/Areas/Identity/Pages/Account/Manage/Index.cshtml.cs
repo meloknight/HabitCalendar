@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using HabitCalendar.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,13 +12,16 @@ namespace HabitCalendar.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel:PageModel
     {
+        protected readonly ApplicationDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
         public IndexModel(
+            ApplicationDbContext db,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager )
         {
+            _db = db;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -66,12 +70,18 @@ namespace HabitCalendar.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync( user );
             var phoneNumber = await _userManager.GetPhoneNumberAsync( user );
+            var userId = await _userManager.GetUserIdAsync( user );
+            var displayUserName = _db.ApplicationUsers
+                .Where( d => d.Id == userId )
+                .Select( d => d.DisplayUserName )
+                .FirstOrDefault();
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                DisplayUserName = displayUserName
             };
         }
 
@@ -101,6 +111,23 @@ namespace HabitCalendar.Areas.Identity.Pages.Account.Manage
                 await LoadAsync( user );
                 return Page();
             }
+
+            //~~~~~~~~~~~~~~~~~~~~~~~~
+            var userId = await _userManager.GetUserIdAsync( user );
+            var currentDisplayUserName = _db.ApplicationUsers
+                .Where( c => c.Id == userId )
+                .Select( c => c.DisplayUserName )
+                .FirstOrDefault();
+
+            if ( currentDisplayUserName != Input.DisplayUserName )
+            {
+                var currentApplicationUser = await _db.ApplicationUsers.FindAsync( userId );
+                currentApplicationUser.DisplayUserName = Input.DisplayUserName;
+                await _db.SaveChangesAsync();
+            }
+            //~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync( user );
             if ( Input.PhoneNumber != phoneNumber )

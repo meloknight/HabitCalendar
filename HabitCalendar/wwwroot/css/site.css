@@ -550,7 +550,7 @@ html, body {
     background-color: var(--color-delete);
 }
 
-.password-change-container {
+.change-container {
     margin-top: 20px;
 }
 

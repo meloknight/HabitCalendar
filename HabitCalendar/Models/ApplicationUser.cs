@@ -11,12 +11,5 @@ namespace HabitCalendar.Models
         public string DisplayUserName { get; set; } = string.Empty;
 
         public ICollection<Habit> Habits { get; set; } = null!;
-        //public ApplicationUser()
-        //{
-        //    UserStartDate = DateOnly.FromDateTime( DateTime.UtcNow );
-        //}
     }
-
-
-
 }

@@ -4,5 +4,9 @@
     ViewData["Title"] = "Confirm email change";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="identity-form">
+    <div class="identity-form__inner-container">
+        <h1 class="identity-form__title">@ViewData["Title"]</h1>
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+    </div>
+</div>

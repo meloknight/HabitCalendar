@@ -95,6 +95,8 @@ namespace HabitCalendar.Areas.Identity.Pages.Account
             // Addition for custom UI on Registration screen and storage of Display Username
             [Required]
             [Display( Name = "Username" )]
+            [MaxLength( 30, ErrorMessage = "Max length is 30 characters" )]
+            [RegularExpression( @"^[^\[\]\(\)\{\}]+$", ErrorMessage = "Special characters, such as brackets, are not allowed." )]
             public string DisplayUserName { get; set; }
 
         }

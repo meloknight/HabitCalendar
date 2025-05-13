@@ -114,8 +114,7 @@ namespace HabitCalendar.Controllers
                 return NotFound();
             }
             Habit? HabitFromDb = _db.Habits.Find( habitId );
-            //Habit? HabitFromDb1 = _db.Habits.FirstOrDefault( u => u.HabitId == habitId );
-            //Habit? HabitFromDb2 = _db.Habits.Where( u => u.HabitId == habitId ).FirstOrDefault();
+
             if ( HabitFromDb == null )
             {
                 return NotFound();

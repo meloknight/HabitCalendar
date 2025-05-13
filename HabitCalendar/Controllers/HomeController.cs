@@ -18,8 +18,6 @@ namespace HabitCalendar.Controllers
         //Action method
         public IActionResult Index()
         {
-
-
             string? userId = _userManager.GetUserId( User );
 
             CalendarInfoModel calendarInfo = new CalendarInfoModel();
@@ -40,16 +38,16 @@ namespace HabitCalendar.Controllers
             }
         }
 
-        public IActionResult Privacy()
-        {
-            var userId = _userManager.GetUserId( User );
+        //public IActionResult Privacy()
+        //{
+        //    var userId = _userManager.GetUserId( User );
 
-            var habits = _db.Habits
-                .Where( h => h.ApplicationUserId == userId )
-                .ToList();
+        //    var habits = _db.Habits
+        //        .Where( h => h.ApplicationUserId == userId )
+        //        .ToList();
 
-            return View( habits );
-        }
+        //    return View( habits );
+        //}
 
         public IActionResult CalendarDayModify( DateOnly date )
         {

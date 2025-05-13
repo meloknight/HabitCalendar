@@ -13,22 +13,23 @@
     --color-light: #cccccc;
     --color-white: white;
     --color-nice: #F0CB53;
+/*    --color-nice: #8e69cf;  THE USUAL YELLOW COLOR*/
     --color-edit: #0094ff;
     --color-delete: #ff9595;
     --color-success: #72c762;
 }
-:root {
+/*:root {
     --large-screen-day-width: 100px;
-    --color-dark: black;
+    --color-dark: white;
     --color-medium-dark: #474747;
     --color-medium-light: #8a8a8a;
     --color-light: #cccccc;
-    --color-white: white;
-    --color-nice: #F0CB53;
+    --color-white: #333333;
+    --color-nice: #8e69cf;
     --color-edit: #0094ff;
     --color-delete: #ff9595;
     --color-success: #72c762;
-}
+}*/
 
 html, body {
     height: 100%;

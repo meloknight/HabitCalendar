@@ -173,12 +173,25 @@ namespace HabitCalendar.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme );
+
+            var htmlMessage = $@"
+                    <html>
+                    <body>
+                        <p>Hey there,</p>
+    
+                        <p>Please click <a href='{HtmlEncoder.Default.Encode( callbackUrl )}'>here</a> to confirm your email.</p>
+    
+                        <p>Thanks and have a lovely rest of your day!</p>
+
+                        <p>Melo</p>
+                    </body>
+                    </html>";
+
             await _emailSender.SendEmailAsync(
                 email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode( callbackUrl )}'>clicking here</a>." );
+                "Confirm your email", htmlMessage );
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Verification email sent. Check your spam if you don't see it immediately :)";
             return RedirectToPage();
         }
     }

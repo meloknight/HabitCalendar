@@ -570,6 +570,12 @@ html, body {
     max-width: calc(var(--large-screen-day-width)*7 + (10px * 6));
     width: 90vw;
 }
+.info-section__image-container {
+    border: 1px solid var(--color-dark);
+}
+.info-section__image {
+    width: 100%;
+}
 
 
 

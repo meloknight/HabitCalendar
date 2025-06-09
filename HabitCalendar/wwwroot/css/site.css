@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
 
 :root {
@@ -333,6 +332,14 @@ html, body {
     color: var(--color-delete);
     padding-right: 3px;
 }
+
+@media screen and (max-width: 800px) {
+    .table-header--habit-list {
+        max-width: 90vw;
+    }
+    }
+
+
 
 /* ~~~~~~~~~~~~~~~~~~~ Create/Edit/Delete Habit Sections ~~~~~~~~~~~~~~~~~~~ */
 .form-container {

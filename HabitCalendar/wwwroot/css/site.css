@@ -6,6 +6,7 @@
 
 :root {
     --large-screen-day-width: 100px;
+    --small-screen-day-width: 60px;
     --color-dark: black;
     --color-medium-dark: #474747;
     --color-medium-light: #8a8a8a;
@@ -104,6 +105,28 @@ html, body {
 .identity-form-inline button:hover {
     color: var(--color-nice);
 }
+
+@media screen and (max-width:900px){
+/*    .nav__internal-container {
+        width: 96vw;
+        max-width: calc(var(--large-screen-day-width)*7 + (10px * 6));
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        height: 25px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }*/
+/*    .nav__internal-container > li > a {
+        width: var(--small-screen-day-width);
+        content: "";
+    }*/
+
+
+}
+
+
+
 
 /* ~~~~~~~~~~~~~~~~~~~ Calendar Section ~~~~~~~~~~~~~~~~~~~ */
 #calendar-section {
@@ -295,7 +318,7 @@ html, body {
 
 /* habit list table block */
 .table--habit-list {
-    width: 100vw;
+    /*width: 100vw;*/
     max-width: calc(var(--large-screen-day-width)*7 + (10px * 6));
     margin-top: 30px;
     border: none;
@@ -334,12 +357,37 @@ html, body {
 }
 
 @media screen and (max-width: 800px) {
+    body{
+        font-size:14px;
+    }
     .table-header--habit-list {
-        max-width: 90vw;
+        width:96vw;
     }
+    .table--habit-list{
+        width:96vw;
     }
-
-
+    .table__row {
+        gap: 2px;
+        grid-template-columns:0.8fr 2fr 0.6fr 0.8fr 0.8fr;
+    }
+}
+@media screen and (max-width: 500px) {
+    body {
+        font-size: 12px;
+    }
+    .table-header--habit-list {
+        width: 96vw;
+    }
+    .table--habit-list {
+        width: 96vw;
+    }
+    .table__row {
+        gap: 2px;
+        /*grid-template-columns: 0.8fr 2fr 0.6fr 0.4fr 0.4fr;*/
+        /*grid-template-columns: 0.8fr 2fr 0.6fr;*/
+        grid-template-columns:1fr 1fr 0.6fr;
+    }
+}
 
 /* ~~~~~~~~~~~~~~~~~~~ Create/Edit/Delete Habit Sections ~~~~~~~~~~~~~~~~~~~ */
 .form-container {

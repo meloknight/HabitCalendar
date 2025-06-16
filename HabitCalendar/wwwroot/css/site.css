@@ -59,8 +59,8 @@ html, body {
     height: 25px;
     /*    padding: 0 10px 0 10px;*/
     /*    border: 1px solid black;*/
-    justify-content: space-between;
-    align-items: center;
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
     list-style: none;
     gap: 10px;
     z-index: 40;
@@ -91,13 +91,15 @@ html, body {
 
 /* NAV IDENTITY SECTION */
 .identity-form-inline {
-    width: 100px;
+    width: var(--large-screen-day-width);
     height: 20px;
     margin: 0px;
     padding: 0px;
     border: 1px solid var(--color-white);
 }
 .identity-form-inline button {
+    font-size:inherit;
+    font-family:inherit;
     border: none;
     background-color: var(--color-white);
     transition: var(--default-transition);
@@ -107,25 +109,20 @@ html, body {
 }
 
 @media screen and (max-width:900px){
-/*    .nav__internal-container {
-        width: 96vw;
-        max-width: calc(var(--large-screen-day-width)*7 + (10px * 6));
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        height: 25px;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-    }*/
-/*    .nav__internal-container > li > a {
+    .nav__internal-container {
+        /*width: 96vw;*/
+        font-size:12px;
+        max-width: calc(var(--small-screen-day-width)*7 + (2px * 6));
+        height: 2px;
+        gap: 2px;
+    }
+    .nav__internal-container > li > a {
         width: var(--small-screen-day-width);
-        content: "";
-    }*/
-
-
+    }
+    .identity-form-inline {
+        width: var(--small-screen-day-width);
+    }
 }
-
-
 
 
 /* ~~~~~~~~~~~~~~~~~~~ Calendar Section ~~~~~~~~~~~~~~~~~~~ */
@@ -144,14 +141,15 @@ html, body {
     justify-content: center;
 }
 #scroll-to-top-button, #scroll-to-bottom-button{
+    /*font-size:inherit;*/
     width: 80px;
     border: 1px solid var(--color-dark);
     background-color: var(--color-white);
 }
-    #scroll-to-top-button:hover, #scroll-to-bottom-button:hover {
-        background-color: var(--color-nice);
-    }
-    .scroll-button-not-visible{
+#scroll-to-top-button:hover, #scroll-to-bottom-button:hover {
+    background-color: var(--color-nice);
+}
+.scroll-button-not-visible{
     display: none;
 }
 #days-of-week-container {
@@ -285,6 +283,67 @@ html, body {
     color: var(--color-light);
 }
 
+@media screen and (max-width:900px) {
+    #calendar-section{
+        font-size:9px;
+    }
+
+    .days-of-week-left, .days-of-week-right {
+        width: var(--small-screen-day-width);
+    }
+    #scroll-to-top-button, #scroll-to-bottom-button {
+        font-size: inherit;
+        width: 50px;
+    }
+    #days-of-week-container {
+        max-width: calc(var(--small-screen-day-width)*7 + (2px * 6));
+        gap: 2px;
+        margin-bottom: 10px;
+    }
+    .day-of-week {
+        width: var(--small-screen-day-width);
+    }
+    .side-calendar-area {
+        gap: 2px;
+    }
+    #calendar-container {
+        width: 100vw;
+        max-width: calc(var(--small-screen-day-width) * 7 + (2px * 6));
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+    }
+    .day-container {
+        width: var(--small-screen-day-width);
+        height: var(--small-screen-day-width);
+    }
+    .day-container__top-container {
+        min-height: 10px;
+    }
+    .day-container__day {
+        width: 10px;
+        padding-right: 3px;
+    }
+    .day-container__circle,
+    .day-container__star {
+        font-size: 11px;
+    }
+    .day-container__big-x {
+        font-size: 32px;
+        height: 32px;
+    }
+    .day-container__bottom-container {
+        min-height: 10px;
+    }
+    .side-container {
+        width: var(--small-screen-day-width);
+        height: var(--small-screen-day-width);
+    }
+
+
+}
+
+
+
 /* ~~~~~~~~~~~~~~~~~~~ HABIT LIST PAGE ~~~~~~~~~~~~~~~~~~~ */
 #habit-list-section {
     padding-top: 20px;
@@ -357,9 +416,9 @@ html, body {
 }
 
 @media screen and (max-width: 800px) {
-    body{
+/*    body{
         font-size:14px;
-    }
+    }*/
     .table-header--habit-list {
         width:96vw;
     }
@@ -372,9 +431,9 @@ html, body {
     }
 }
 @media screen and (max-width: 500px) {
-    body {
+/*    body {
         font-size: 12px;
-    }
+    }*/
     .table-header--habit-list {
         width: 96vw;
     }

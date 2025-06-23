@@ -574,6 +574,36 @@ html, body {
     cursor: pointer;
 }
 
+@media screen and (max-width: 800px) {
+    .form-container--single-day__header-container {
+        width: 96vw;
+        gap: 2px;
+    }
+    .form-container--single-day__body-container {
+        margin-top: 10px;
+        width: 96vw;
+    }
+    .form-container--single-day__body-row {
+        gap: 2px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form-container--single-day__header-container {
+        gap:2px;
+        grid-template-columns: 1fr 1fr 1fr 1fr 0.1fr;
+    }
+    .form-container--single-day__body-row {
+        grid-template-columns: 1fr 1fr 1fr 1fr 0.1fr;
+    }
+
+    .form-container--single-day__checkbox {
+        height: 16px;
+        width: 16px;
+    }
+}
+
+
 /* ~~~~~~~~~~~~~~~~~~~ Identity Page(s) ~~~~~~~~~~~~~~~~~~~ */
 .identity-form{
     display: flex;

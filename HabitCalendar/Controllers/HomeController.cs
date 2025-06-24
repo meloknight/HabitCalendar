@@ -19,17 +19,24 @@ namespace HabitCalendar.Controllers
         public IActionResult Index()
         {
             string? userId = _userManager.GetUserId( User );
-
             CalendarInfoModel calendarInfo = new CalendarInfoModel();
 
             if ( userId != null )
             {
-                CalendarLayout cl = new CalendarLayout( _db, userId );
-                calendarInfo.currentWeek = cl.currentWeek;
-                calendarInfo.firstWeek = cl.firstWeek;
-                calendarInfo.remainingWeeks = cl.remainingWeeks;
+                try
+                {
+                    CalendarLayout cl = new CalendarLayout( _db, userId );
+                    calendarInfo.currentWeek = cl.currentWeek;
+                    calendarInfo.firstWeek = cl.firstWeek;
+                    calendarInfo.remainingWeeks = cl.remainingWeeks;
 
-                return View( calendarInfo );
+                    return View( calendarInfo );
+                }
+                catch ( Exception ex )
+                {
+                    return View( ex );
+                }
+
             }
             else
             {
@@ -38,67 +45,65 @@ namespace HabitCalendar.Controllers
             }
         }
 
-        //public IActionResult Privacy()
-        //{
-        //    var userId = _userManager.GetUserId( User );
-
-        //    var habits = _db.Habits
-        //        .Where( h => h.ApplicationUserId == userId )
-        //        .ToList();
-
-        //    return View( habits );
-        //}
-
         public IActionResult CalendarDayModify( DateOnly date )
         {
             string? userId = _userManager.GetUserId( User );
 
-            List<Habit> userHabits = _db.Habits
-                .Where( h => h.ApplicationUserId == userId )
-            //.Select( row => row.HabitId )
-                .ToList();
-
-            List<int> habitIds = new List<int>();
-            foreach ( Habit habit in userHabits )
+            try
             {
-                habitIds.Add( habit.HabitId );
-            }
 
-            // Fill up a set of HabitDisplayModels
-            var chosenHabitDayCompleted = _db.HabitDaysCompleted
-                .Where( h => h.DateHabitCompleted == date )
-                .ToList();
+                List<Habit> userHabits = _db.Habits
+                    .Where( h => h.ApplicationUserId == userId )
+                //.Select( row => row.HabitId )
+                    .ToList();
 
-            List<HabitDisplayModel> chosenDaysHabitsForDisplay = new();
-            foreach ( Habit habit in userHabits )
-            {
-                // build out the habitDisplay, then add it to chosenDaysHabitsForDisplay
-                HabitDisplayModel habitDisplay = new();
-                habitDisplay.HabitId = habit.HabitId;
-                habitDisplay.HabitName = habit.HabitName;
-                habitDisplay.HabitDisplayMethod = habit.HabitDisplayMethod;
-                habitDisplay.isHabitCompleted = false;
-                habitDisplay.HabitDayValue = "";
-                habitDisplay.Notes = "";
-                habitDisplay.Date = date;
-
-                if ( chosenHabitDayCompleted.Count > 0 )
+                List<int> habitIds = new List<int>();
+                foreach ( Habit habit in userHabits )
                 {
-                    foreach ( HabitDaysCompleted habitCompleted in chosenHabitDayCompleted )
-                    {
-                        if ( habitCompleted.HabitId == habit.HabitId )
-                        {
-                            habitDisplay.isHabitCompleted = habitCompleted.isHabitCompleted;
-                            habitDisplay.HabitDayValue = habitCompleted.HabitDayValue;
-                            habitDisplay.Notes = habitCompleted.Notes;
-                            habitDisplay.HabitDaysCompletedId = habitCompleted.HabitDaysCompletedId;
-                        }
-                    }
-
+                    habitIds.Add( habit.HabitId );
                 }
-                chosenDaysHabitsForDisplay.Add( habitDisplay );
+
+                // Fill up a set of HabitDisplayModels
+                var chosenHabitDayCompleted = _db.HabitDaysCompleted
+                    .Where( h => h.DateHabitCompleted == date )
+                    .ToList();
+
+                List<HabitDisplayModel> chosenDaysHabitsForDisplay = new();
+                foreach ( Habit habit in userHabits )
+                {
+                    // build out the habitDisplay, then add it to chosenDaysHabitsForDisplay
+                    HabitDisplayModel habitDisplay = new();
+                    habitDisplay.HabitId = habit.HabitId;
+                    habitDisplay.HabitName = habit.HabitName;
+                    habitDisplay.HabitDisplayMethod = habit.HabitDisplayMethod;
+                    habitDisplay.isHabitCompleted = false;
+                    habitDisplay.HabitDayValue = "";
+                    habitDisplay.Notes = "";
+                    habitDisplay.Date = date;
+
+                    if ( chosenHabitDayCompleted.Count > 0 )
+                    {
+                        foreach ( HabitDaysCompleted habitCompleted in chosenHabitDayCompleted )
+                        {
+                            if ( habitCompleted.HabitId == habit.HabitId )
+                            {
+                                habitDisplay.isHabitCompleted = habitCompleted.isHabitCompleted;
+                                habitDisplay.HabitDayValue = habitCompleted.HabitDayValue;
+                                habitDisplay.Notes = habitCompleted.Notes;
+                                habitDisplay.HabitDaysCompletedId = habitCompleted.HabitDaysCompletedId;
+                            }
+                        }
+
+                    }
+                    chosenDaysHabitsForDisplay.Add( habitDisplay );
+                }
+                return View( chosenDaysHabitsForDisplay );
             }
-            return View( chosenDaysHabitsForDisplay );
+            catch ( Exception ex )
+            {
+                return View( ex );
+            }
+
         }
 
         [HttpPost]

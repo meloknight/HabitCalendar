@@ -21,11 +21,17 @@ namespace HabitCalendar.Controllers
                 string? returnUrl = Url.Action( "Index", "Home" );
                 return RedirectToPage( "/Account/Login", new { area = "Identity", returnUrl } );
             }
+            try
+            {
+                queryDatabase qD = new();
+                List<Habit> habitList = qD.generateHabitList( _db, userId );
 
-            queryDatabase qD = new();
-            List<Habit> habitList = qD.generateHabitList( _db, userId );
-
-            return base.View( habitList );
+                return base.View( habitList );
+            }
+            catch ( Exception ex )
+            {
+                return View( ex );
+            }
         }
 
         public IActionResult Create()

@@ -22,13 +22,19 @@ namespace HabitCalendar.Controllers
             if ( User.Identity?.IsAuthenticated == true )
             {
                 string userId = _userManager.GetUserId( User );
+                try
+                {
+                    var DisplayUserName = _db.ApplicationUsers
+                        .Where( u => u.Id == userId )
+                        .Select( u => u.DisplayUserName )
+                        .FirstOrDefault();
 
-                var DisplayUserName = _db.ApplicationUsers
-                    .Where( u => u.Id == userId )
-                    .Select( u => u.DisplayUserName )
-                    .FirstOrDefault();
-
-                ViewData["DisplayUserName"] = DisplayUserName;
+                    ViewData["DisplayUserName"] = DisplayUserName;
+                }
+                catch ( Exception ex )
+                {
+                    View( ex );
+                }
             }
             base.OnActionExecuting( context );
         }

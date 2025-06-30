@@ -86,7 +86,7 @@ html, body {
     align-items: end;
 }
 .footer-container{
-    color: var(--color-medium-light);
+    color: var(--color-light);
 }
 
 /* NAV IDENTITY SECTION */
